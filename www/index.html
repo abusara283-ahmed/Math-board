@@ -211,6 +211,69 @@ svg{display:block}
 #toast{position:fixed;z-index:60;bottom:max(18px,env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--desk);padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 40px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
+
+/* ---------- classes chip, resources, text editor, functions, timer ---------- */
+#clsBtn{background:var(--accent-soft);color:var(--ink);font-weight:600}
+#top>*{flex-shrink:0}
+#clsBtn .cn{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#clsBtn svg.cv{width:14px;height:14px;opacity:.6}
+.pop.clsp{width:270px}
+.pop .add-row input{height:36px}
+#res,#fnDlg{position:fixed;inset:0;z-index:50;background:rgba(10,16,24,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px}
+#res[hidden],#fnDlg[hidden],#timer[hidden],#txEd[hidden]{display:none}
+.rs{width:min(860px,100%);max-height:calc(100% - 10px);display:flex;flex-direction:column;background:var(--chrome-solid);border-radius:24px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);border:1px solid var(--line);overflow:hidden}
+.rs-top{display:flex;align-items:center;gap:12px;padding:18px 20px 12px;flex-wrap:wrap}
+.rs-top h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.2}
+.rs-top .seg{flex:1;min-width:220px;max-width:340px}
+.rs-top small{color:var(--muted);font-size:12px}
+.rs-top .x{position:static;margin-inline-start:auto}
+#rsBody{padding:6px 20px 16px;overflow:auto;flex:1;min-height:200px}
+.rs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.rs-t{border:1px solid var(--line);background:transparent;border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:8px;align-items:center;font-size:12.5px;font-weight:500}
+.rs-t:hover{border-color:var(--accent);background:var(--accent-soft)}
+.rs-t canvas{width:100%;height:auto;max-height:120px;object-fit:contain;border-radius:8px;box-shadow:0 0 0 1px var(--line);background:#fff}
+.rs-list{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.rs-f{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:14px;padding:8px 10px}
+.rs-f .ic svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.6}
+.rs-f .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rs-f .nm b{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rs-f .nm small{font-size:11px;color:var(--faint)}
+.rs-empty{padding:40px 10px;text-align:center;color:var(--muted);font-size:13px;line-height:1.9}
+.rs-foot{display:flex;gap:8px;align-items:center;padding:12px 20px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.rs-foot span{flex:1;font-size:11.5px;color:var(--muted);min-width:180px}
+.btn.arm{background:var(--danger);color:#fff;border-color:transparent}
+.bcol{display:flex;gap:6px;padding:0 6px 6px}
+.bcol .chip{display:flex;align-items:center;gap:6px}
+.bcol .chip i{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+#txEd{position:fixed;z-index:40;background:var(--chrome-solid);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:10px;display:flex;flex-direction:column;gap:8px}
+#txTa{width:100%;box-sizing:border-box;min-height:64px;resize:vertical;border:1px solid var(--line);border-radius:11px;background:transparent;padding:8px 10px;font-size:18px;line-height:1.6;-webkit-user-select:text;user-select:text;font-family:var(--f-ui)}
+.kb{display:flex;flex-wrap:wrap;gap:4px}
+.kb button{min-width:34px;height:32px;padding:0 7px;border:1px solid var(--line);border-radius:9px;background:transparent;font-size:15px}
+.kb button.w{font-size:11.5px;color:var(--accent);font-weight:600}
+.kb button:hover{background:var(--accent-soft)}
+#txEd .row{display:flex;gap:6px;justify-content:space-between;align-items:center}
+#txEd .row small{font-size:11px;color:var(--faint)}
+.fn{width:min(460px,100%);background:var(--chrome-solid);border-radius:22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:12px;position:relative}
+.fn h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:24px}
+.fn .in{display:flex;align-items:center;gap:8px;border:1px solid var(--line-2);border-radius:13px;padding:0 12px}
+.fn .in b{font-size:18px;color:var(--muted)}
+#fnIn{flex:1;min-width:0;height:48px;border:0;background:transparent;font-size:20px;-webkit-user-select:text;user-select:text;direction:rtl}
+#fnErr{color:var(--danger);font-size:12px;min-height:16px}
+.fn .exs{display:flex;flex-wrap:wrap;gap:6px}
+#fnCols{display:flex;gap:8px}#fnCols .sw{width:26px}
+#timer{position:fixed;z-index:35;left:max(16px,env(safe-area-inset-left,0px));top:calc(max(12px,env(safe-area-inset-top,0px)) + 70px);width:250px;background:var(--chrome-solid);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+#tmHead{display:flex;align-items:center;justify-content:space-between;padding:8px 10px 0 14px;font-size:12px;color:var(--muted);cursor:move;touch-action:none}
+#tmHead button{width:30px;height:30px;border:0;border-radius:9px;background:transparent;display:grid;place-items:center;color:var(--muted)}
+#tmHead svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round}
+#tmDisp{direction:ltr;font-family:var(--f-display);font-size:64px;line-height:1.15;text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);padding:2px 0}
+#timer.done #tmDisp{color:var(--danger);animation:tmf .5s steps(2) 6}
+@keyframes tmf{50%{opacity:.2}}
+#tmBarW{height:4px;background:var(--line);margin:0 14px;border-radius:4px;overflow:hidden}
+#tmBar{height:100%;background:var(--accent);transform-origin:right;transition:transform .2s linear}
+#timer .pre{display:flex;gap:4px;padding:10px 12px 4px;justify-content:center;flex-wrap:wrap}
+#timer .pre .chip{height:28px;padding:0 10px}
+#timer .ctl{display:flex;gap:6px;padding:8px 12px 12px}
+#timer .ctl .btn{flex:1;justify-content:center}
 /* ---------- Random draw (القرعة) ---------- */
 #picker,#nets{position:fixed;inset:0;z-index:50;background:rgba(10,16,24,.45);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
 .pk{width:min(860px,100%);max-height:calc(100% - 10px);overflow:auto;background:var(--chrome-solid);border-radius:24px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5);display:grid;grid-template-columns:300px 1fr;border:1px solid var(--line)}
@@ -356,6 +419,8 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
   #nkCv{height:300px}
   #tabs{max-width:calc(100% - 28px)}
   #top .lbl{display:none}
+  #clsBtn{padding:0 8px}
+  #clsBtn svg:first-child{display:none}
   .brand span{display:none}
 }
 @media (max-width:560px){
@@ -366,6 +431,8 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
   #top{max-width:calc(100% - 28px);overflow-x:auto}
   .brand{display:none}
 }
+@media (max-width:1400px){ .brand{display:none} }
+@media (max-width:1180px) and (min-width:561px){ #top .lbl{display:none} #top{max-width:calc(100% - 200px);overflow-x:auto} }
 @media (max-height:760px){ .tool{height:44px} .tool .lbl{display:none} .sep{margin:3px 0} }
 @media (max-height:560px){ .tool{height:38px} .tool.small{height:34px} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -379,6 +446,8 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
 
 <header id="top" aria-label="الملف والصفحات">
   <div class="brand"><i>ل</i><span>لوح الرياضيات</span></div>
+  <button class="tb" id="clsBtn" title="الصف الحالي: لكل صف سبوراته وملفاته"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 19a5 5 0 0 0-2.4-4.3"/></svg><span class="cn" id="clsName">…</span><svg class="cv" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
+  <button class="tb" id="resBtn" title="المصادر: قوالب جاهزة وملفاتي"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10l2 2h6.5A1.5 1.5 0 0 1 20 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5Z"/><path d="M8 11h8M8 15h5"/></svg><span class="lbl">المصادر</span></button>
   <button class="tb pri" id="openBtn" title="فتح PDF أو صورة"><svg viewBox="0 0 24 24"><path d="M4 7.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9.5a2 2 0 0 0-2-2h-6.5L9.8 5.3A1 1 0 0 0 9 5H6a2 2 0 0 0-2 2.5Z"/><path d="M12 11v6M9.5 13.5 12 11l2.5 2.5"/></svg><span class="lbl">فتح ملف</span></button>
   <button class="tb" id="bgBtn" title="خلفية الصفحة"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9.3h16M4 14.7h16M9.3 4v16M14.7 4v16"/></svg><span class="lbl">الخلفية</span></button>
   <span class="vsep"></span>
@@ -402,12 +471,13 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
     <button class="tool" data-tool="erase" title="الممحاة (E)"><svg viewBox="0 0 24 24"><path d="m14.5 4.7 4.8 4.8a1.5 1.5 0 0 1 0 2.1L12 19H8.2l-3.5-3.5a1.5 1.5 0 0 1 0-2.1l7.7-7.7a1.5 1.5 0 0 1 2.1 0Z"/><path d="m9.5 9.5 5 5M12 19h8"/></svg><span class="lbl">ممحاة</span></button>
     <button class="tool" data-tool="pan" title="تحريك اللوح (V أو مفتاح المسافة)"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5V4.5a1.5 1.5 0 0 1 3 0V10m0-3.5a1.5 1.5 0 0 1 3 0v7a6.5 6.5 0 0 1-6.5 6.5h-.8a6 6 0 0 1-4.6-2.2L4.3 14.4a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/></svg><span class="lbl">تحريك</span></button>
     <button class="tool" data-tool="snip" title="قص جزء ولصقه (X)"><svg viewBox="0 0 24 24"><circle cx="6.5" cy="17.5" r="2.6"/><circle cx="17.5" cy="17.5" r="2.6"/><path d="M8.4 15.6 16 4.5M15.6 15.6 8 4.5"/></svg><span class="lbl">قص</span></button>
+    <button class="tool" data-tool="text" title="نص ومعادلات (T)"><svg viewBox="0 0 24 24"><path d="M5 6V4.5h14V6M12 4.5V19M9 19h6"/></svg><span class="lbl">نص</span></button>
   </div>
   <div class="sep"></div>
   <div class="grp">
     <button class="tool" id="rulerBtn" aria-pressed="false" title="المسطرة (R)"><svg viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="1.5" transform="rotate(-30 12 12)"/><path d="m7.4 13.6-1-1.7M10 12.1l-.6-1M12.6 10.6l-1-1.7M15.2 9.1l-.6-1M17.8 7.6l-1-1.7" transform="translate(0 1.6)"/></svg><span class="lbl">مسطرة</span></button>
     <button class="tool" id="protBtn" aria-pressed="false" title="المنقلة"><svg viewBox="0 0 24 24"><path d="M3 17a9 9 0 0 1 18 0Z"/><path d="M12 17 16.5 9.5M7 17a5 5 0 0 1 10 0"/></svg><span class="lbl">منقلة</span></button>
-    <button class="tool" id="netBtn" title="شبكات المجسمات"><svg viewBox="0 0 24 24"><path d="M9 3h6v6H9zM3 9h6v6H3zM9 9h6v6H9zM15 9h6v6h-6zM9 15h6v6H9z"/></svg><span class="lbl">شبكات</span></button>
+    <button class="tool" id="moreBtn" title="المزيد: رسم دالة، المؤقت، شبكات المجسمات، المصادر"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><path d="M16.75 13.5v6.5M13.5 16.75H20"/></svg><span class="lbl">المزيد</span></button>
     <button class="tool" id="pickBtn" title="القرعة العشوائية"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="8.6" cy="8.6" r="1.1" fill="currentColor"/><circle cx="15.4" cy="15.4" r="1.1" fill="currentColor"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/><circle cx="15.4" cy="8.6" r="1.1" fill="currentColor"/><circle cx="8.6" cy="15.4" r="1.1" fill="currentColor"/></svg><span class="lbl">قرعة</span></button>
   </div>
   <div class="sep"></div>
@@ -448,6 +518,31 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
 <div id="drop" hidden>أفلت الملف هنا لفتحه</div>
 <input type="file" id="file" accept="application/pdf,.pdf,image/*" multiple hidden>
 
+<div id="res" hidden><div class="rs" role="dialog" aria-modal="true" aria-labelledby="rsTitle">
+  <div class="rs-top"><h2 id="rsTitle">المصادر</h2><div class="seg" id="rsSeg"><button data-t="tpl" aria-pressed="true">قوالب جاهزة</button><button data-t="mine" aria-pressed="false">ملفاتي</button></div><small id="rsCls"></small><button class="x" id="rsClose" title="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div id="rsBody"></div>
+  <div class="rs-foot"><span>ملفاتك وكتابتك محفوظة على هذا الجهاز. خذ نسخة احتياطية لنقلها لجهاز آخر.</span><button class="btn" id="rsBackup">نسخة احتياطية</button><button class="btn" id="rsRestore">استعادة نسخة</button></div>
+</div></div>
+<div id="fnDlg" hidden><div class="fn" role="dialog" aria-modal="true">
+  <button class="x" id="fnClose" title="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <h2>رسم دالة</h2>
+  <div class="in"><b>ص =</b><input id="fnIn" placeholder="مثال: س² − ٣" autocomplete="off" spellcheck="false"></div>
+  <div class="kb"><button type="button" data-k="س">س</button><button type="button" data-k="²">²</button><button type="button" data-k="^">^</button><button type="button" data-k="√">√</button><button type="button" data-k="π">π</button><button type="button" data-k="(">(</button><button type="button" data-k=")">)</button><button type="button" data-k="|">|</button><button type="button" data-k="جا">جا</button><button type="button" data-k="جتا">جتا</button><button type="button" data-k="ظا">ظا</button></div>
+  <div id="fnErr"></div>
+  <div class="exs"><button class="chip" data-ex="س² − ٣">س² − ٣</button><button class="chip" data-ex="٢س + ١">٢س + ١</button><button class="chip" data-ex="−٠٫٥س² + ٢س">−٠٫٥س² + ٢س</button><button class="chip" data-ex="|س|">|س|</button><button class="chip" data-ex="√س">√س</button><button class="chip" data-ex="١/س">١/س</button><button class="chip" data-ex="جا(س)">جا(س)</button></div>
+  <div class="row" style="display:flex;align-items:center;justify-content:space-between;gap:10px"><div id="fnCols"></div><button class="btn pri" id="fnGo" style="height:44px;padding:0 22px">ارسم</button></div>
+</div></div>
+<div id="timer" hidden>
+  <div id="tmHead"><span>المؤقت</span><button id="tmClose" title="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div id="tmDisp">٠٥:٠٠</div><div id="tmBarW"><div id="tmBar"></div></div>
+  <div class="pre"><button class="chip" data-m="1">١ د</button><button class="chip" data-m="2">٢ د</button><button class="chip" data-m="3">٣ د</button><button class="chip" data-m="5">٥ د</button><button class="chip" data-m="10">١٠ د</button><button class="chip" data-m="15">١٥ د</button><button class="chip" data-a="30">+٣٠ ث</button><button class="chip" data-a="-30">−٣٠ ث</button></div>
+  <div class="ctl"><button class="btn pri" id="tmGo">ابدأ</button><button class="btn" id="tmReset">إعادة</button></div>
+</div>
+<div id="txEd" hidden>
+  <textarea id="txTa" dir="auto" placeholder="اكتب النص أو المعادلة…" spellcheck="false"></textarea>
+  <div class="kb"><button type="button" class="w" data-ins="{|/}">كسر</button><button type="button" class="w" data-ins="^{|}">أُس</button><button type="button" class="w" data-ins="√{|}">جذر</button><button type="button" class="" data-ins="²">²</button><button type="button" class="" data-ins="³">³</button><button type="button" class="" data-ins="π">π</button><button type="button" class="" data-ins="°">°</button><button type="button" class="" data-ins="×">×</button><button type="button" class="" data-ins="÷">÷</button><button type="button" class="" data-ins="±">±</button><button type="button" class="" data-ins="=">=</button><button type="button" class="" data-ins="≠">≠</button><button type="button" class="" data-ins="≤">≤</button><button type="button" class="" data-ins="≥">≥</button><button type="button" class="" data-ins="∞">∞</button><button type="button" class="" data-ins="θ">θ</button><button type="button" class="" data-ins="∠">∠</button><button type="button" class="" data-ins="△">△</button><button type="button" class="" data-ins="⊥">⊥</button><button type="button" class="" data-ins="∥">∥</button><button type="button" class="" data-ins="≈">≈</button><button type="button" class="" data-ins="س">س</button><button type="button" class="" data-ins="ص">ص</button></div>
+  <div class="row"><small>كسر: {١/٢} · أس: س^٢ · جذر: √{٩}</small><span style="display:flex;gap:6px"><button class="btn" id="txCancel" type="button">إلغاء</button><button class="btn pri" id="txOk" type="button">تم</button></span></div>
+</div>
 <div id="picker" hidden>
   <div class="pk" role="dialog" aria-modal="true" aria-labelledby="pkTitle">
     <div class="pk-side">
@@ -522,10 +617,17 @@ let W=0,H=0,DPR=1;
 const PEN_COLORS=['#1c2541','#111111','#d1312c','#1d5fd3','#11905a','#e8751a','#7a3fc4','#8a5a2b','#ffffff'];
 const HL_COLORS=['#ffe14d','#9df07a','#ff9ad5','#8fd3ff','#ffb86b'];
 const S={tool:'pen',pen:{color:'#1c2541',size:4},hl:{color:'#ffe14d',size:24},shp:{color:'#1d5fd3',size:3},
-  shape:'line',fill:false,dash:false,measure:true,angles:true,snap:true,smart:true,hlStraight:false,eraseSize:20};
+  txt:{color:'#1c2541',size:44},board:'white',shape:'line',fill:false,dash:false,measure:true,angles:true,snap:true,smart:true,hlStraight:false,eraseSize:20};
 try{Object.assign(S,JSON.parse(localStorage.getItem('mathboard.s')||'{}'));S.tool='pen'}catch(e){}
 const saveS=()=>{try{localStorage.setItem('mathboard.s',JSON.stringify(S))}catch(e){}};
 
+let INV=false;
+const BOARDS={white:{paper:'#ffffff',l1:'#e3e8ee',l2:'#cdd6df',ax:'#3d4856',tx:'#4a5563',dot:'#b9c3ce',ln:'#cfd9e4',acc:'#e6f2f0'},
+  green:{paper:'#1f4a3a',l1:'rgba(255,255,255,.09)',l2:'rgba(255,255,255,.2)',ax:'#e9f2ec',tx:'#d5e4da',dot:'rgba(255,255,255,.32)',ln:'rgba(255,255,255,.16)',acc:'rgba(255,255,255,.08)'},
+  black:{paper:'#17191c',l1:'rgba(255,255,255,.08)',l2:'rgba(255,255,255,.18)',ax:'#eceff2',tx:'#d4d9df',dot:'rgba(255,255,255,.3)',ln:'rgba(255,255,255,.14)',acc:'rgba(255,255,255,.07)'}};
+let PAL=BOARDS.white;
+const isBoardPg=p=>!p.img&&!p.pdf&&p.bg!=='file';
+const DARK_INK=new Set(['#1c2541','#111111']);
 function newPage(o={}){return Object.assign({w:1920,h:1200,bg:'grid',img:null,items:[],undo:[],redo:[]},o)}
 const newBoard=(name='السبورة')=>({name,kind:'board',pages:[newPage()],cur:0});
 let docs=[newBoard()],D=0;
@@ -538,13 +640,7 @@ try{const a=JSON.parse(localStorage.getItem(AS_KEY)||'null');
     if(r.length){docs=r;D=Math.max(0,Math.min(r.length-1,a.D|0));asRestored=r.some(d=>d.pages.some(p=>p.items.length))}
   }}catch(e){console.warn('autosave restore failed',e)}
 let pages=docs[D].pages,cur=docs[D].cur;
-let asLast='',asWarned=false;
-function autosave(){
-  try{stash();const bd=docs.filter(d=>d.kind==='board');
-    const out={v:1,D:Math.max(0,bd.indexOf(docs[D])),docs:bd.map(d=>({name:d.name,cur:d.cur,pages:d.pages.map(p=>({w:p.w,h:p.h,bg:p.bg,items:p.items}))}))};
-    const j=JSON.stringify(out);if(j===asLast)return;try{localStorage.setItem(AS_KEY,j)}catch(q){out.docs.forEach(d=>d.pages.forEach(p=>{p.items=p.items.filter(i=>i.t!=='img')}));localStorage.setItem(AS_KEY,JSON.stringify(out));if(!asWarned){asWarned=true;toast('الذاكرة ممتلئة: القصاصات الملصقة لن تُحفظ تلقائيًا. صدّر عملك PDF للاحتفاظ بها.')}}asLast=j;
-  }catch(e){console.warn('autosave failed',e)}
-}
+function autosave(){saveWs()}
 setInterval(autosave,3000);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)autosave()});
 addEventListener('pagehide',autosave);
@@ -578,25 +674,26 @@ function redraw(){renderBase();renderLive();renderOver();$('#zoomVal').textConte
 /* ---------------- Background drawing ---------------- */
 function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
 function drawBg(ctx,p){
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,p.w,p.h);
+  PAL=(S.board&&S.board!=='white'&&isBoardPg(p))?BOARDS[S.board]||BOARDS.white:BOARDS.white;
+  ctx.fillStyle=PAL.paper;ctx.fillRect(0,0,p.w,p.h);
   if(p.img){ctx.drawImage(p.img,0,0,p.w,p.h);return}
   if(p.pdf){ctx.fillStyle='#9aa3b1';ctx.font='500 '+Math.round(p.w/40)+'px "Readex Pro",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('جارٍ تحميل الصفحة '+AR(p.pno)+'…',p.w/2,p.h/2);
     if(ctx===cB)ensureImg(p).then(()=>{if(pg()===p)renderBase()}).catch(()=>{});return}
   const bg=p.bg;
   ctx.save();ctx.beginPath();ctx.rect(0,0,p.w,p.h);ctx.clip();
   if(bg==='grid'||bg==='coord'){
-    ctx.lineWidth=1;ctx.strokeStyle='#e3e8ee';ctx.beginPath();
+    ctx.lineWidth=1;ctx.strokeStyle=PAL.l1;ctx.beginPath();
     for(let x=0;x<=p.w;x+=U/4*0+U){ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,p.h)}
     for(let y=0;y<=p.h;y+=U){ctx.moveTo(0,y+.5);ctx.lineTo(p.w,y+.5)}
     ctx.stroke();
-    if(bg==='grid'){ctx.strokeStyle='#cdd6df';ctx.beginPath();
+    if(bg==='grid'){ctx.strokeStyle=PAL.l2;ctx.beginPath();
       for(let x=0;x<=p.w;x+=U*5){ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,p.h)}
       for(let y=0;y<=p.h;y+=U*5){ctx.moveTo(0,y+.5);ctx.lineTo(p.w,y+.5)}ctx.stroke()}
     if(bg==='coord'){
       const ox=Math.round(p.w/2/U)*U,oy=Math.round(p.h/2/U)*U;
-      ctx.strokeStyle='#3d4856';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(10,oy);ctx.lineTo(p.w-10,oy);ctx.moveTo(ox,p.h-10);ctx.lineTo(ox,10);ctx.stroke();
+      ctx.strokeStyle=PAL.ax;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(10,oy);ctx.lineTo(p.w-10,oy);ctx.moveTo(ox,p.h-10);ctx.lineTo(ox,10);ctx.stroke();
       arrowHead(ctx,10+14,oy,10,oy,12);arrowHead(ctx,p.w-24,oy,p.w-10,oy,12);arrowHead(ctx,ox,24,ox,10,12);arrowHead(ctx,ox,p.h-24,ox,p.h-10,12);
-      ctx.fillStyle='#4a5563';ctx.font='500 14px "Readex Pro",sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+      ctx.fillStyle=PAL.tx;ctx.font='500 14px "Readex Pro",sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
       for(let x=ox+U,i=1;x<p.w-30;x+=U,i++){ctx.fillRect(x-.75,oy-5,1.5,10);ctx.fillText(AR(i),x,oy+8)}
       for(let x=ox-U,i=-1;x>30;x-=U,i--){ctx.fillRect(x-.75,oy-5,1.5,10);ctx.fillText(AR(i),x,oy+8)}
       ctx.textAlign='right';ctx.textBaseline='middle';
@@ -606,15 +703,56 @@ function drawBg(ctx,p){
       ctx.textAlign='right';ctx.textBaseline='top';ctx.font='500 14px "Readex Pro",sans-serif';ctx.fillText('٠',ox-8,oy+8);
     }
   }else if(bg==='dots'){
-    ctx.fillStyle='#b9c3ce';
+    ctx.fillStyle=PAL.dot;
     for(let x=U;x<p.w;x+=U)for(let y=U;y<p.h;y+=U){ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill()}
   }else if(bg==='iso'){
-    ctx.fillStyle='#b9c3ce';const dy=U*Math.sqrt(3)/2;
+    ctx.fillStyle=PAL.dot;const dy=U*Math.sqrt(3)/2;
     for(let r=0,y=dy/2;y<p.h;y+=dy,r++)for(let x=(r%2?U/2:0)+U/2;x<p.w;x+=U){ctx.beginPath();ctx.arc(x,y,2,0,7);ctx.fill()}
   }else if(bg==='lines'){
-    ctx.strokeStyle='#cfd9e4';ctx.lineWidth=1.2;ctx.beginPath();
+    ctx.strokeStyle=PAL.ln;ctx.lineWidth=1.2;ctx.beginPath();
     for(let y=U*2;y<p.h;y+=U*1.5){ctx.moveTo(0,y);ctx.lineTo(p.w,y)}ctx.stroke();
     ctx.strokeStyle='#f0b4b4';ctx.beginPath();ctx.moveTo(p.w-U*2,0);ctx.lineTo(p.w-U*2,p.h);ctx.stroke();
+  }else if(bg==='numline'){
+    ctx.strokeStyle=PAL.ax;ctx.fillStyle=PAL.tx;ctx.lineWidth=2.5;ctx.font='500 24px "Readex Pro",sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    const x0=150,x1=p.w-150,st=(x1-x0)/20;
+    for(const fy of [.22,.5,.78]){const y=Math.round(p.h*fy);ctx.beginPath();ctx.moveTo(x0-70,y);ctx.lineTo(x1+70,y);ctx.stroke();arrowHead(ctx,x1+40,y,x1+80,y,18);arrowHead(ctx,x0-40,y,x0-80,y,18);
+      for(let i=0;i<=20;i++){const x=x0+i*st,n=i-10,l=n%5?11:18;ctx.beginPath();ctx.moveTo(x,y-l);ctx.lineTo(x,y+l);ctx.stroke();ctx.fillText(AR(n),x,y+26)}}
+  }else if(bg==='unitcircle'){
+    const cx=p.w/2,cy=p.h/2,R=420;
+    ctx.strokeStyle=PAL.l1;ctx.lineWidth=1;ctx.beginPath();for(let x=cx%U;x<=p.w;x+=U){ctx.moveTo(x+.5,0);ctx.lineTo(x+.5,p.h)}for(let y=cy%U;y<=p.h;y+=U){ctx.moveTo(0,y+.5);ctx.lineTo(p.w,y+.5)}ctx.stroke();
+    ctx.strokeStyle=PAL.ax;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx-R-110,cy);ctx.lineTo(cx+R+110,cy);ctx.moveTo(cx,cy+R+80);ctx.lineTo(cx,cy-R-80);ctx.stroke();
+    arrowHead(ctx,cx+R+80,cy,cx+R+110,cy,14);arrowHead(ctx,cx,cy-R-50,cx,cy-R-80,14);
+    ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,R,0,7);ctx.stroke();
+    const I=t=>'\u2066'+t+'\u2069',F={0:'(١ ، ٠)',30:'('+I('√٣/٢')+' ، '+I('١/٢')+')',45:'('+I('√٢/٢')+' ، '+I('√٢/٢')+')',60:'('+I('١/٢')+' ، '+I('√٣/٢')+')',90:'(٠ ، ١)'};
+    ctx.font='500 19px "Readex Pro",sans-serif';ctx.textBaseline='middle';
+    for(const d of [0,30,45,60,90,120,135,150,180,210,225,240,270,300,315,330]){const a=-d*Math.PI/180,px=cx+R*Math.cos(a),py=cy+R*Math.sin(a);
+      ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=PAL.l2;ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(px,py);ctx.stroke();ctx.restore();
+      ctx.fillStyle=PAL.ax;ctx.beginPath();ctx.arc(px,py,6,0,7);ctx.fill();
+      ctx.fillStyle=PAL.tx;ctx.textAlign='center';ctx.fillText(AR(d)+'°',cx+(R+38)*Math.cos(a),cy+(R+38)*Math.sin(a));
+      if(F[d]!==undefined){ctx.textAlign='left';ctx.font='600 18px "Readex Pro",sans-serif';ctx.fillStyle=PAL.ax;const lx=d===0?cx+R+14:d===90?cx+16:cx+(R+62)*Math.cos(a),ly=d===0?cy+30:d===90?cy-R-30:cy+(R+62)*Math.sin(a);ctx.fillText(F[d],lx,ly);ctx.fillStyle=PAL.tx;ctx.font='500 19px "Readex Pro",sans-serif'}}
+    ctx.font='600 20px "Readex Pro",sans-serif';ctx.fillStyle=PAL.tx;ctx.textAlign='center';ctx.fillText('س',cx+R+130,cy-22);ctx.fillText('ص',cx-28,cy-R-74);ctx.fillText('نق = ١',cx+R/2,cy+26);
+  }else if(bg==='mult'){
+    const c=Math.min((p.w-120)/11,(p.h-100)/11),x0=(p.w-c*11)/2,y0=(p.h-c*11)/2;
+    ctx.fillStyle=PAL.acc;ctx.fillRect(x0,y0,c*11,c);ctx.fillRect(x0+c*10,y0,c,c*11);
+    ctx.strokeStyle=PAL.l2;ctx.lineWidth=1.5;ctx.beginPath();for(let i=0;i<=11;i++){ctx.moveTo(x0+i*c,y0);ctx.lineTo(x0+i*c,y0+11*c);ctx.moveTo(x0,y0+i*c);ctx.lineTo(x0+11*c,y0+i*c)}ctx.stroke();
+    ctx.strokeStyle=PAL.ax;ctx.lineWidth=3;ctx.strokeRect(x0,y0,c*11,c*11);
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    for(let r=0;r<=10;r++)for(let k=0;k<=10;k++){const x=x0+(10-k)*c+c/2,y=y0+r*c+c/2;let t;
+      if(!r&&!k)t='×';else if(!r)t=AR(k);else if(!k)t=AR(r);else t=AR(r*k);
+      ctx.font=(!r||!k?'700 ':'500 ')+Math.round(c*.36)+'px "Readex Pro",sans-serif';ctx.fillStyle=!r||!k?PAL.ax:PAL.tx;ctx.fillText(t,x,y)}
+  }else if(bg==='shapes'){
+    const cw=p.w/3,ch=p.h/2,S0=Math.min(cw,ch)*.46;ctx.strokeStyle=PAL.ax;ctx.lineWidth=4;ctx.lineJoin='round';ctx.fillStyle=PAL.tx;ctx.font='600 30px "Readex Pro",sans-serif';ctx.textAlign='center';ctx.textBaseline='top';
+    const L=[['مثلث',(x,y)=>{ctx.moveTo(x,y-S0*.55);ctx.lineTo(x+S0*.6,y+S0*.45);ctx.lineTo(x-S0*.6,y+S0*.45);ctx.closePath()}],
+      ['مربع',(x,y)=>ctx.rect(x-S0*.48,y-S0*.48,S0*.96,S0*.96)],['مستطيل',(x,y)=>ctx.rect(x-S0*.75,y-S0*.4,S0*1.5,S0*.8)],
+      ['دائرة',(x,y)=>ctx.arc(x,y,S0*.5,0,7)],['متوازي أضلاع',(x,y)=>{ctx.moveTo(x-S0*.5,y-S0*.4);ctx.lineTo(x+S0*.8,y-S0*.4);ctx.lineTo(x+S0*.5,y+S0*.4);ctx.lineTo(x-S0*.8,y+S0*.4);ctx.closePath()}],
+      ['شبه منحرف',(x,y)=>{ctx.moveTo(x-S0*.4,y-S0*.4);ctx.lineTo(x+S0*.4,y-S0*.4);ctx.lineTo(x+S0*.8,y+S0*.4);ctx.lineTo(x-S0*.8,y+S0*.4);ctx.closePath()}]];
+    L.forEach((q,i)=>{const x=p.w-(i%3)*cw-cw/2,y=Math.floor(i/3)*ch+ch/2-30;ctx.beginPath();q[1](x,y);ctx.stroke();ctx.fillText(q[0],x,y+S0*.62)});
+  }else if(bg==='exam'){
+    const m=80;ctx.strokeStyle=PAL.ax;ctx.lineWidth=2.5;rr(ctx,m,m,p.w-2*m,250,18);ctx.stroke();
+    ctx.fillStyle=PAL.ax;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='400 54px "Lalezar","Readex Pro",sans-serif';ctx.fillText('ورقة عمل',p.w/2,m+70);
+    ctx.font='500 26px "Readex Pro",sans-serif';ctx.fillStyle=PAL.tx;ctx.direction='rtl';ctx.textAlign='right';
+    ctx.fillText('اسم الطالب: ..................................',p.w-m-30,m+165);ctx.textAlign='left';ctx.fillText('الصف: ........   التاريخ: ..../..../........',m+30,m+165);ctx.direction='ltr';
+    ctx.strokeStyle=PAL.ln;ctx.lineWidth=1.3;ctx.beginPath();for(let y=m+330;y<p.h-m;y+=64){ctx.moveTo(m,y);ctx.lineTo(p.w-m,y)}ctx.stroke();
   }
   ctx.restore();
 }
@@ -752,9 +890,9 @@ function hexA(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n
 const IMGS=new Map();
 function imgOf(src){let im=IMGS.get(src);if(!im){im=new Image();im.onload=()=>{renderBase()};im.src=src;IMGS.set(src,im)}return im}
 function drawImgItem(ctx,it){const im=imgOf(it.src);if(im.complete&&im.naturalWidth)ctx.drawImage(im,it.x,it.y,it.w,it.h);else{ctx.save();ctx.fillStyle='#eef1f4';ctx.fillRect(it.x,it.y,it.w,it.h);ctx.restore()}}
-function drawItem(ctx,it){it.t==='img'?drawImgItem(ctx,it):it.t==='shape'?drawShape(ctx,it):drawStroke(ctx,it)}
+function drawItem(ctx,it){if(INV&&DARK_INK.has(it.color))it=Object.assign({},it,{color:'#f4f1e8'});if(it.t==='text')return drawText(ctx,it);if(it.t==='fn')return drawFn(ctx,it);it.t==='img'?drawImgItem(ctx,it):it.t==='shape'?drawShape(ctx,it):drawStroke(ctx,it)}
 
-function renderPage(ctx,p){drawBg(ctx,p);for(const it of p.items)drawItem(ctx,it)}
+function renderPage(ctx,p){drawBg(ctx,p);INV=S.board!=='white'&&isBoardPg(p);for(const it of p.items)drawItem(ctx,it);INV=false}
 function renderBase(){
   const p=pg();cB.setTransform(DPR,0,0,DPR,0,0);cB.fillStyle=css('--desk');cB.fillRect(0,0,W,H);
   cB.setTransform(DPR*V.s,0,0,DPR*V.s,DPR*V.tx,DPR*V.ty);
@@ -764,9 +902,10 @@ function renderBase(){
 let draft=null; // in-progress item
 function renderLive(){
   cL.setTransform(DPR,0,0,DPR,0,0);cL.clearRect(0,0,W,H);
-  if(!draft)return;cL.setTransform(DPR*V.s,0,0,DPR*V.s,DPR*V.tx,DPR*V.ty);
+  if(!draft)return;cL.setTransform(DPR*V.s,0,0,DPR*V.s,DPR*V.tx,DPR*V.ty);INV=S.board!=='white'&&isBoardPg(pg());
   if(draft.t==='hl'){cL.save();cL.globalAlpha=1;drawStroke(cL,Object.assign({},draft,{t:'hlLive'}));cL.restore()}
   else drawItem(cL,draft);
+  INV=false;
 }
 // highlighter preview drawn opaque on a multiply-blended canvas with 0.55 opacity
 const _ds=drawStroke;
@@ -904,7 +1043,8 @@ function commit(it){snap();pg().items.push(it);renderBase();hideHint()}
 
 /* ---------------- Erasing ---------------- */
 function hitItem(it,x,y,r){
-  if(it.t==='img')return x>=it.x-r&&x<=it.x+it.w+r&&y>=it.y-r&&y<=it.y+it.h+r;
+  if(it.t==='fn')return hitFn(it,x,y,r);
+  if(it.t==='img'||it.t==='text')return x>=it.x-r&&x<=it.x+it.w+r&&y>=it.y-r&&y<=it.y+it.h+r;
   if(it.t!=='shape'){const rr=r+it.size/2;const p=it.pts;if(p.length===1)return Math.hypot(p[0][0]-x,p[0][1]-y)<rr;
     for(let i=1;i<p.length;i++)if(segD([x,y],p[i-1],p[i])<rr)return true;return false}
   const g=geom(it),rr=r+it.size/2;
@@ -921,7 +1061,7 @@ function eraseAt(x,y){
 }
 
 /* ---------------- Snip & paste ---------------- */
-function topImg(x,y){const it=pg().items;for(let i=it.length-1;i>=0;i--){const q=it[i];if(q.t==='img'&&x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h)return q}return null}
+function topImg(x,y){const it=pg().items;for(let i=it.length-1;i>=0;i--){const q=it[i];if((q.t==='img'||q.t==='text')&&x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h)return q}return null}
 function selHit(x,y){const s2=sel,hr=22/V.s;if(Math.hypot(x-s2.x,y-s2.y)<hr)return 'x';if(Math.hypot(x-s2.x-s2.w,y-s2.y-s2.h)<hr)return 'rs';if(x>=s2.x&&x<=s2.x+s2.w&&y>=s2.y&&y<=s2.y+s2.h)return 'body';return null}
 function beginEdit(it){snap();const p=pg(),i=p.items.indexOf(it),c=Object.assign({},it);p.items[i]=c;sel=c;return c}
 async function snipCapture(r){
@@ -949,6 +1089,7 @@ const ptrs=new Map();let penSeen=false,act=null,panning=false,spaceDown=false,pi
 function snapGrid(v){return S.snap&&!pg().img&&pg().bg!=='blank'&&pg().bg!=='lines'?Math.round(v/(U/2))*(U/2):v}
 stage.addEventListener('contextmenu',e=>{e.preventDefault()});
 stage.addEventListener('pointerdown',e=>{
+  if(txEdit){closeTextEditor(true);return}
   closePops();hideHint();
   if(e.button===2||(e.pointerType==='pen'&&e.button===2)){openRing(e.clientX,e.clientY);return}
   if(!$('#ring').hidden)closeRing();
@@ -969,6 +1110,7 @@ stage.addEventListener('pointerdown',e=>{
     if(h==='body'){const it=beginEdit(sel);act={kind:'imgmv',it,ox:it.x-P.x,oy:it.y-P.y,id:e.pointerId};stage.dataset.cursor='move';return}}
   if(sel){sel=null;renderOver()}
   if(tool==='pan'){const im=topImg(P.x,P.y);if(im){const it=beginEdit(im);act={kind:'imgmv',it,ox:it.x-P.x,oy:it.y-P.y,id:e.pointerId};renderOver();return}}
+  if(tool==='text'){e.preventDefault();const it=topImg(P.x,P.y);openTextEditor(P,it&&it.t==='text'?it:null);return}
   if(tool==='snip'){snipR={x1:P.x,y1:P.y,x2:P.x,y2:P.y};act={kind:'snip',id:e.pointerId};renderOver();return}
   if(tool==='pan'){act={kind:'pan',id:e.pointerId,x:e.clientX,y:e.clientY,tx:V.tx,ty:V.ty};panning=true;stage.dataset.cursor='panning';return}
   const hit=hitInstr(P.x,P.y);
@@ -1012,7 +1154,7 @@ stage.addEventListener('pointermove',e=>{
     case 'pan':V.tx=act.tx+e.clientX-act.x;V.ty=act.ty+e.clientY-act.y;redraw();break;
     case 'imove':act.r.x=P.x+act.ox;act.r.y=P.y+act.oy;renderOver();break;
     case 'imgmv':act.it.x=P.x+act.ox;act.it.y=P.y+act.oy;renderBase();renderOver();break;
-    case 'imgrs':{const it=act.it,ar=it.h/it.w;it.w=Math.max(40,P.x-it.x);it.h=it.w*ar;renderBase();renderOver();break}
+    case 'imgrs':{const it=act.it;if(it.t==='text'){const nw=Math.max(20,P.x-it.x);it.size=Math.max(10,Math.min(400,it.size*nw/it.w));txMeasure(it)}else{const ar=it.h/it.w;it.w=Math.max(40,P.x-it.x);it.h=it.w*ar}renderBase();renderOver();break}
     case 'snip':snipR.x2=P.x;snipR.y2=P.y;renderOver();break;
     case 'irot':{const r=act.r;let cx,cy;if(r.type==='ruler'){const c=rulerWorld(r,0,0);cx=c.x;cy=c.y}else{cx=r.x;cy=r.y}
       let a=Math.atan2(P.y-cy,P.x-cx);if(r.type==='ruler'){a=Math.atan2(P.y-cy,P.x-cx)-Math.atan2(r.w/2,r.len)}
@@ -1088,6 +1230,7 @@ function buildPanel(){
   else if(t==='erase')h=`<h3>الممحاة <small>E</small></h3><div class="sec"><span class="cap">حجم الممحاة</span><div class="sizes">${[12,20,36].map(s=>`<button class="sz" data-es="${s}" aria-pressed="${s===S.eraseSize}"><i style="width:${s*.6}px;height:${s*.6}px;border-radius:50%;background:transparent;border:2px solid var(--ink)"></i></button>`).join('')}</div>
     <p class="note">تمسح الممحاة الخط أو الشكل كاملًا بلمسة واحدة، ولا تمس ملف PDF أو الصورة.</p></div>
     <div class="sec row"><button class="btn dng" id="clrPg">مسح الصفحة</button><button class="btn dng" id="delPg">حذف الصفحة</button></div>`;
+  else if(t==='text')h=`<h3>نص ومعادلات <small>T</small></h3><div class="sec"><span class="cap">اللون</span>${swatches(TXT_COLORS,S.txt.color,'txt')}</div><div class="sec"><span class="cap">الحجم</span>${sizes([28,44,64,96],S.txt.size,'txt',40)}</div><p class="note" style="margin:0">اضغط على الصفحة واكتب. للكسر اكتب {١/٢}، وللأس س^٢، وللجذر √{٩}، أو استخدم الأزرار. اضغط على نص موجود لتعديله، وحرّكه بأداة «تحريك».</p>`;
   else if(t==='snip')h=`<h3>قص ولصق <small>X</small></h3><p class="note" style="margin:0">١. اسحب مستطيلًا على أي جزء من صفحة PDF أو صورة أو سبورة.<br>٢. انتقل إلى التبويب أو الصفحة التي تريدها.<br>٣. اضغط «لصق القصاصة هنا» أسفل الشاشة.<br><br>لتحريك قصاصة لاحقًا أو تكبيرها أو حذفها، اختر أداة «تحريك» ثم اضغط عليها.</p>`;
   else if(t==='pan')h=`<h3>تحريك اللوح <small>V</small></h3><p class="note" style="margin:0">اسحب لتحريك الصفحة. لتحريك قصاصة ملصقة اضغط عليها واسحبها. للتكبير استخدم إصبعين أو Ctrl مع عجلة الفأرة. مفتاح المسافة يحرّك اللوح مؤقتًا مع أي أداة.</p>`;
   el.innerHTML=h;
@@ -1139,13 +1282,15 @@ function openPop(anchor,html,onClick){
   const r=anchor.getBoundingClientRect();let l=r.left+r.width/2-d.offsetWidth/2;l=Math.max(12,Math.min(W-d.offsetWidth-12,l));d.style.left=l+'px';d.style.top=(r.bottom+8)+'px';
   d.addEventListener('click',e=>{onClick(e)});
 }
-document.addEventListener('pointerdown',e=>{if(popEl&&!popEl.contains(e.target)&&!e.target.closest('#bgBtn,#expBtn,#qdCls,#pageNo'))closePops()},true);
+document.addEventListener('pointerdown',e=>{if(popEl&&!popEl.contains(e.target)&&!e.target.closest('#bgBtn,#expBtn,#qdCls,#pageNo,#clsBtn,#moreBtn'))closePops()},true);
 const BGS=[['blank','بيضاء',''],['grid','مربعات','g'],['dots','نقاط','d'],['coord','مستوى إحداثي','c'],['iso','نقاط مثلثية','i'],['lines','سطور','l']];
 $('#bgBtn').onclick=e=>{
   if(popEl){closePops();return}
   const p=pg();
   openPop(e.currentTarget,`<div class="bgs">${BGS.map(b=>`<button class="bgt" data-bg="${b[0]}" aria-pressed="${!p.img&&p.bg===b[0]}"><i class="${b[2]}"></i>${b[1]}</button>`).join('')}</div>
-   <div style="padding:6px 6px 2px;font-size:11px;color:var(--muted)">${p.img?'هذه صفحة ملف. اختيار خلفية يضيف صفحة سبورة جديدة بعدها.':'تُطبَّق على الصفحة الحالية'}</div>`,ev=>{
+   <div style="padding:6px 6px 2px;font-size:11px;color:var(--muted)">${p.img?'هذه صفحة ملف. اختيار خلفية يضيف صفحة سبورة جديدة بعدها.':'تُطبَّق على الصفحة الحالية'}</div><div class="sub" style="padding:10px 6px 6px">لون السبورة (لكل السبورات)</div><div class="bcol">${[['white','بيضاء','#fff'],['green','خضراء','#1f4a3a'],['black','سوداء','#17191c']].map(b=>`<button class="chip" data-board="${b[0]}" aria-pressed="${S.board===b[0]}"><i style="background:${b[2]}"></i>${b[1]}</button>`).join('')}</div><button class="it" data-tplmore="1" style="margin-top:4px"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10l2 2h6.5A1.5 1.5 0 0 1 20 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5Z"/></svg><span>قوالب أخرى<small>خط الأعداد، دائرة الوحدة، جدول الضرب…</small></span></button>`,ev=>{
+    const bc=ev.target.closest('[data-board]');if(bc){S.board=bc.dataset.board;saveS();renderBase();closePops();toast(S.board==='white'?'السبورة بيضاء':'السبورة '+(S.board==='green'?'خضراء':'سوداء')+'. الحبر الداكن يظهر أبيض تلقائيًا.');return}
+    if(ev.target.closest('[data-tplmore]')){closePops();openRes('tpl');return}
     const b=ev.target.closest('.bgt');if(!b)return;
     if(p.img){pages.splice(cur+1,0,newPage({bg:b.dataset.bg}));goPage(cur+1)}else{p.bg=b.dataset.bg;renderBase()}
     closePops();});
@@ -1203,7 +1348,7 @@ const imgCache=[];
 function ensureImg(p){
   if(p.img||!p.pdf)return Promise.resolve();if(p.loading)return p.loading;
   p.loading=(async()=>{
-    const page=await p.pdf.getPage(p.pno),vp=page.getViewport({scale:p.sc});
+    const page=await p.pdf.getPage(p.pno),vp=page.getViewport({scale:p.sc||(p.sc=p.w/page.getViewport({scale:1}).width)});
     const c=document.createElement('canvas');c.width=p.w;c.height=p.h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);
     x.scale(p.w/vp.width,p.h/vp.height);await page.render({canvasContext:x,viewport:vp}).promise;
     p.img=await canvasToImg(c);c.width=c.height=0;page.cleanup&&page.cleanup();
@@ -1217,29 +1362,15 @@ function releaseDoc(d){for(const p of d.pages){if(p.img&&p.img.src&&p.img.src.st
 async function openFiles(files){
   const add=[];
   for(const f of files){
-    try{
-      if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){
-        toast('جارٍ فتح '+f.name+'…',true);await ensurePdf();
-        const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer()),isEvalSupported:false}).promise;
-        const n=pdf.numPages,pgs=[];
-        for(let i=1;i<=n;i++){const page=await pdf.getPage(i),vp=page.getViewport({scale:1}),sc=Math.min(2,2400/Math.max(vp.width,vp.height));
-          pgs.push(newPage({w:Math.round(vp.width*sc),h:Math.round(vp.height*sc),bg:'file',pdf,pno:i,sc}));
-          if(i%15===0)toast(`جارٍ فتح ${f.name}… ${AR(i)} من ${AR(n)} صفحة`,true)}
-        add.push({name:f.name.replace(/\.pdf$/i,''),kind:'pdf',pages:pgs,cur:0,pdf});
-      }else if(f.type.startsWith('image/')){
-        const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=URL.createObjectURL(f)});
-        const k=Math.min(1,2600/Math.max(im.naturalWidth,im.naturalHeight)),w=Math.max(400,Math.round(im.naturalWidth*k)),h=Math.round(im.naturalHeight*w/im.naturalWidth);
-        add.push({name:(f.name||'صورة').replace(/\.[a-z0-9]+$/i,'')||'صورة',kind:'img',pages:[newPage({w,h,img:im,bg:'file'})],cur:0});
-      }else toast('هذا النوع من الملفات غير مدعوم. افتح ملف PDF أو صورة.');
-    }catch(e){console.error(e);toast('تعذّر فتح الملف '+f.name+'. تأكد أنه ملف PDF أو صورة سليمة، وأن الإنترنت متصل.')}
+    try{const rec=await libAdd(f);if(!rec){toast('هذا النوع من الملفات غير مدعوم. افتح ملف PDF أو صورة.');continue}
+      const i=docs.findIndex(d=>d.fileId===rec.id);if(i>=0){if(files.length===1){switchDoc(i);toast('هذا الملف مفتوح بالفعل في تبويب.');return}continue}
+      toast('جارٍ فتح '+rec.name+'…',true);add.push(await buildFileDoc(rec));
+    }catch(e){console.error(e);toast('تعذّر فتح الملف '+f.name+'. تأكد أنه ملف PDF أو صورة سليمة.')}
   }
   if(!add.length)return;
-  stash();
-  if(docs.length===1&&docs[0].kind==='board'&&docs[0].pages.length===1&&!docs[0].pages[0].items.length)docs=[];
-  docs.push(...add);D=docs.length-add.length;pages=docs[D].pages;cur=0;draft=null;
-  fit();syncPages();hideHint();ensureNear();
+  addDocs(add);
   const total=add.reduce((n,d)=>n+d.pages.length,0);
-  toast(add.length===1?(total>1?`فُتح الملف كاملًا: ${AR(total)} صفحة. اكتب عليه مباشرة.`:'فُتح الملف. اكتب عليه مباشرة.'):`فُتح ${AR(add.length)} ملفات، كل ملف في تبويب مستقل في الأعلى.`);
+  toast(add.length===1?(total>1?`فُتح الملف: ${AR(total)} صفحة، وحُفظ في المصادر. اكتب عليه مباشرة.`:'فُتح الملف وحُفظ في المصادر. اكتب عليه مباشرة.'):`فُتح ${AR(add.length)} ملفات وحُفظت في المصادر.`);
 }
 /* ---------------- Page navigator ---------------- */
 const toLatin=v=>String(v).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[^\d]/g,'');
@@ -1249,7 +1380,7 @@ function thumb(p){
   if(p.thumbP)return p.thumbP;
   p.thumbP=thumbQ=thumbQ.then(async()=>{
     const tw=150,k=tw/p.w,c=document.createElement('canvas');c.width=tw;c.height=Math.max(1,Math.round(p.h*k));const x=c.getContext('2d');x.scale(k,k);
-    if(p.pdf&&!p.img){const page=await p.pdf.getPage(p.pno),vp=page.getViewport({scale:p.sc*k}),t=document.createElement('canvas');t.width=c.width;t.height=c.height;const tx=t.getContext('2d');tx.fillStyle='#fff';tx.fillRect(0,0,t.width,t.height);
+    if(p.pdf&&!p.img){const page=await p.pdf.getPage(p.pno),vp=page.getViewport({scale:(p.sc||(p.sc=p.w/page.getViewport({scale:1}).width))*k}),t=document.createElement('canvas');t.width=c.width;t.height=c.height;const tx=t.getContext('2d');tx.fillStyle='#fff';tx.fillRect(0,0,t.width,t.height);
       await page.render({canvasContext:tx,viewport:vp}).promise;x.drawImage(t,0,0,p.w,p.h);for(const it of p.items)drawItem(x,it)}
     else renderPage(x,p);
     p.thumb=c.toDataURL('image/jpeg',.72);p.thumbN=p.items.length;return p.thumb;
@@ -1320,6 +1451,10 @@ $('#tabs').addEventListener('click',e=>{
     closeDoc(i);return}
   const t=e.target.closest('.tab');if(t)switchDoc(+t.dataset.i);
 });
+$('#tabs').addEventListener('dblclick',e=>{const t=e.target.closest('.tab');if(!t||e.target.closest('[data-close]'))return;const i=+t.dataset.i,nm=t.querySelector('.nm');if(!nm)return;
+  nm.contentEditable='true';nm.focus();try{document.getSelection().selectAllChildren(nm)}catch(q){}
+  const done=()=>{nm.removeEventListener('blur',done);const v=nm.textContent.trim();if(v&&docs[i])docs[i].name=v.slice(0,40);renderTabs()};
+  nm.addEventListener('blur',done);nm.addEventListener('keydown',ev=>{ev.stopPropagation();if(ev.key==='Enter'){ev.preventDefault();nm.blur()}});});
 $('#tabs').addEventListener('keydown',e=>{const t=e.target.closest('.tab');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();switchDoc(+t.dataset.i)}});
 const fileIn=$('#file');
 $('#openBtn').onclick=$('#hintOpen').onclick=()=>fileIn.click();
@@ -1355,6 +1490,7 @@ addEventListener('contextmenu',e=>{if(e.target.closest('#ring'))e.preventDefault
 addEventListener('keydown',e=>{
   if(e.target.closest&&e.target.closest('textarea,input'))return;
   if(!$('#nets').hidden){if(e.key==='Escape')closeNets();return}
+  if(!$('#res').hidden){if(e.key==='Escape')closeRes();return}
   if(!$('#picker').hidden){if(e.key==='Escape')closePicker();if((e.key==='Enter'||e.key===' ')&&(e.target===document.body||e.target.id==='pkGo')){e.preventDefault();draw()}return}
   const k=e.key.toLowerCase(),m=e.ctrlKey||e.metaKey;
   if(m&&k==='z'){e.preventDefault();e.shiftKey?redo():undo();return}
@@ -1362,7 +1498,7 @@ addEventListener('keydown',e=>{
   if(m)return;
   if((e.key==='Delete'||e.key==='Backspace')&&sel&&pg().items.includes(sel)){e.preventDefault();snap();pg().items.splice(pg().items.indexOf(sel),1);sel=null;renderBase();renderOver();return}
   if(e.key===' '){if(!spaceDown){spaceDown=true;stage.dataset.cursor='pan'}e.preventDefault();return}
-  const map={p:'pen',h:'hl',s:'shape',e:'erase',v:'pan',x:'snip','ء':'snip','ح':'pen','ا':'hl','س':'shape','ث':'erase','ر':'pan'};
+  const map={p:'pen',h:'hl',s:'shape',e:'erase',v:'pan',x:'snip',t:'text','ف':'text','ء':'snip','ح':'pen','ا':'hl','س':'shape','ث':'erase','ر':'pan'};
   if(map[k]){setTool(map[k],false);return}
   if(k==='r'||k==='ق')toggleInstr('ruler');
   if(k==='q'||k==='ض'){quickDraw();return}
@@ -1676,7 +1812,7 @@ function openNets(){
   nkSelect(NK.i);
 }
 function closeNets(){cancelAnimationFrame(NK.anim);$('#nets').hidden=true}
-$('#netBtn').onclick=openNets;$('#nkClose').onclick=closeNets;
+$('#nkClose').onclick=closeNets;
 $('#nets').addEventListener('pointerdown',e=>{if(e.target.id==='nets')closeNets()});
 $('#nkList').addEventListener('click',e=>{const b=e.target.closest('.nk-it');if(b)nkSelect(+b.dataset.i)});
 $('#nkF').addEventListener('input',e=>{cancelAnimationFrame(NK.anim);NK.fold=1-e.target.value/1000;nkDraw()});
@@ -1694,11 +1830,336 @@ $('#nkInsert').onclick=()=>{
   closeNets();toast(`أُدرجت شبكة ${NETS[NK.i].n}. الخطوط المتقطعة هي خطوط الطي.`);
 };
 
+/* ================= Storage (IndexedDB): files library + one workspace per class ================= */
+const DB=(()=>{let pr;
+  function open(){return pr||(pr=new Promise((res,rej)=>{const r=indexedDB.open('mathboard',1);
+    r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('files'))d.createObjectStore('files',{keyPath:'id'});if(!d.objectStoreNames.contains('ws'))d.createObjectStore('ws',{keyPath:'id'})};
+    r.onsuccess=()=>res(r.result);r.onerror=()=>{pr=null;rej(r.error)}}))}
+  async function tx(st,mode,fn){const d=await open();return new Promise((res,rej)=>{const t=d.transaction(st,mode),s=t.objectStore(st);let out;const q=fn(s);if(q)q.onsuccess=()=>{out=q.result};t.oncomplete=()=>res(out);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})}
+  return {get:(s,k)=>tx(s,'readonly',x=>x.get(k)),put:(s,v)=>tx(s,'readwrite',x=>x.put(v)),del:(s,k)=>tx(s,'readwrite',x=>x.delete(k)),all:s=>tx(s,'readonly',x=>x.getAll()),clear:s=>tx(s,'readwrite',x=>x.clear())};
+})();
+const fid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+let WS=null,wsReady=false,wsLast='',wsBusy=false;
+try{WS=localStorage.getItem('mathboard.ws')}catch(e){}
+if(!CL.classes.some(c=>c.id===WS))WS=CL.active;
+const wsCls=()=>CL.classes.find(c=>c.id===WS);
+function wsSnapshot(){stash();
+  return {id:WS,D,docs:docs.filter(d=>d.kind==='board'||d.fileId).map(d=>({name:d.name,kind:d.kind,fileId:d.fileId||null,cur:d.cur,
+    pages:d.pages.map(p=>({w:p.w,h:p.h,bg:p.bg,pno:p.pdf?p.pno:0,file:!!(p.bg==='file'),items:p.items}))}))};
+}
+async function saveWs(force){
+  if((!wsReady&&!force)||wsBusy)return;
+  try{const s=wsSnapshot(),j=JSON.stringify(s);if(j===wsLast&&!force)return;wsBusy=true;await DB.put('ws',s);wsLast=j;
+    try{localStorage.removeItem(AS_KEY)}catch(e){}}
+  catch(e){console.warn('save failed',e)}finally{wsBusy=false}
+}
+async function libAdd(f){
+  const kind=(f.type==='application/pdf'||/\.pdf$/i.test(f.name||''))?'pdf':(f.type||'').startsWith('image/')?'img':null;if(!kind)return null;
+  const name=(f.name||(kind==='pdf'?'ملف':'صورة')).replace(/\.[a-z0-9]+$/i,'')||'ملف';
+  try{const all=await DB.all('files');const ex=all.find(r=>r.name===name&&r.size===f.size&&r.kind===kind);if(ex)return ex}catch(e){}
+  const rec={id:fid(),name,kind,type:f.type||'',size:f.size||0,added:Date.now(),blob:f};
+  try{await DB.put('files',rec)}catch(e){console.warn('library save failed',e)}
+  return rec;
+}
+async function buildFileDoc(rec,saved){
+  const sp=saved&&Array.isArray(saved.pages)?saved.pages:null;
+  if(rec.kind==='pdf'){
+    await ensurePdf();
+    const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await rec.blob.arrayBuffer()),isEvalSupported:false}).promise;
+    const n=pdf.numPages,pgs=[];
+    if(sp){for(const q of sp){if(q.pno>0&&q.pno<=n)pgs.push(newPage({w:q.w,h:q.h,bg:'file',pdf,pno:q.pno,sc:0,items:q.items||[]}));else if(!q.pno&&!q.file)pgs.push(newPage({w:q.w,h:q.h,bg:q.bg||'grid',items:q.items||[]}))}}
+    if(!pgs.length)for(let i=1;i<=n;i++){const page=await pdf.getPage(i),vp=page.getViewport({scale:1}),sc=Math.min(2,2400/Math.max(vp.width,vp.height));
+      pgs.push(newPage({w:Math.round(vp.width*sc),h:Math.round(vp.height*sc),bg:'file',pdf,pno:i,sc}));
+      if(i%15===0)toast(`جارٍ فتح ${rec.name}… ${AR(i)} من ${AR(n)} صفحة`,true)}
+    return {name:saved&&saved.name||rec.name,kind:'pdf',pages:pgs,cur:Math.min(pgs.length-1,saved&&saved.cur|0||0),pdf,fileId:rec.id};
+  }
+  const im=await new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=URL.createObjectURL(rec.blob)});
+  const k=Math.min(1,2600/Math.max(im.naturalWidth,im.naturalHeight)),w=Math.max(400,Math.round(im.naturalWidth*k)),h=Math.round(im.naturalHeight*w/im.naturalWidth);
+  let pgs=[];
+  if(sp)for(const q of sp)pgs.push(q.file?newPage({w,h,img:im,bg:'file',items:q.items||[]}):newPage({w:q.w,h:q.h,bg:q.bg||'grid',items:q.items||[]}));
+  if(!pgs.some(p=>p.img))pgs=[newPage({w,h,img:im,bg:'file'})];
+  return {name:saved&&saved.name||rec.name,kind:'img',pages:pgs,cur:Math.min(pgs.length-1,saved&&saved.cur|0||0),fileId:rec.id};
+}
+async function loadWs(r){
+  const out=[];
+  for(const d of r.docs||[]){
+    try{if(d.kind==='board'){if(d.pages&&d.pages.length)out.push({name:d.name||'السبورة',kind:'board',cur:Math.min(d.pages.length-1,d.cur|0),pages:d.pages.map(q=>newPage({w:+q.w||1920,h:+q.h||1200,bg:q.bg||'grid',items:q.items||[]}))});continue}
+      const rec=await DB.get('files',d.fileId);if(rec)out.push(await buildFileDoc(rec,d));
+    }catch(e){console.warn('restore doc failed',e)}
+  }
+  docs.forEach(releaseDoc);sel=null;
+  docs=out.length?out:[newBoard()];D=Math.max(0,Math.min(docs.length-1,r.D|0));pages=docs[D].pages;cur=docs[D].cur;draft=null;
+  fit();syncPages();ensureNear();
+  if(docs.some(d=>d.kind!=='board'||d.pages.some(p=>p.items.length)))hideHint();
+}
+async function wsBoot(){
+  clSave();try{localStorage.setItem('mathboard.ws',WS)}catch(e){}
+  try{const r=await DB.get('ws',WS);
+    if(r&&r.docs&&r.docs.length){toast('جارٍ تحميل عمل '+(wsCls()?wsCls().name:'الصف')+'…',true);await loadWs(r);$('#toast').classList.remove('show')}
+    wsReady=true;await saveWs(true);
+  }catch(e){console.warn('storage unavailable',e);wsReady=true}
+  syncCls();
+}
+async function switchClass(id){
+  if(id===WS){closePops();return}
+  closePops();await saveWs(true);wsReady=false;
+  WS=id;CL.active=id;clSave();try{localStorage.setItem('mathboard.ws',id)}catch(e){}
+  syncCls();toast('جارٍ فتح '+(wsCls()?wsCls().name:'الصف')+'…',true);
+  try{const r=await DB.get('ws',id);
+    if(r&&r.docs&&r.docs.length)await loadWs(r);
+    else{docs.forEach(releaseDoc);docs=[newBoard('السبورة')];D=0;pages=docs[0].pages;cur=0;draft=null;sel=null;fit();syncPages()}
+  }catch(e){console.warn(e)}
+  wsReady=true;wsLast='';await saveWs(true);
+  toast('أنت الآن في '+(wsCls()?wsCls().name:'الصف')+'. كل ما تكتبه يُحفظ لهذا الصف.');
+}
+function syncCls(){const c=wsCls();$('#clsName').textContent=c?c.name:'اختر صفًا'}
+$('#clsBtn').onclick=e=>{
+  if(popEl&&popEl.classList.contains('clsp')){closePops();return}
+  openPop(e.currentTarget,`<div class="sub">مساحة العمل الحالية</div>${CL.classes.map(c=>`<button class="it ${c.id===WS?'on':''}" data-ws="${c.id}"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6M18 19a5 5 0 0 0-2.4-4.3"/></svg><span>${esc(c.name||'بدون اسم')}<small>${AR(c.students.length)} طالبًا</small></span></button>`).join('')}
+    <form class="add-row" id="clsAdd" style="margin:6px 4px 2px"><input id="clsNew" placeholder="اسم صف جديد، مثل ١٠/١" autocomplete="off"><button class="btn pri" type="submit">إضافة</button></form>
+    <button class="it" data-x="manage"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></svg><span>إدارة الصفوف والطلاب<small>إعادة التسمية، الحذف، قوائم الطلاب</small></span></button>`,ev=>{
+    const b=ev.target.closest('[data-ws]');if(b){switchClass(b.dataset.ws);return}
+    if(ev.target.closest('[data-x="manage"]')){closePops();openPicker();return}
+  });
+  popEl.classList.add('clsp');
+  $('#clsAdd').addEventListener('submit',ev=>{ev.preventDefault();const n=$('#clsNew').value.trim();if(!n)return;const id=uid();CL.classes.push({id,name:n,students:[]});clSave();renderChips&&renderChips();switchClass(id)});
+};
+
+/* ================= Resources (templates + my files) ================= */
+const TPLS=[['blank','صفحة بيضاء'],['grid','ورق مربعات'],['coord','مستوى إحداثي'],['numline','خطوط الأعداد'],['unitcircle','دائرة الوحدة'],['mult','جدول الضرب'],['shapes','الأشكال الهندسية'],['exam','ورقة عمل / اختبار'],['dots','ورق نقاط'],['iso','نقاط مثلثية'],['lines','ورق سطور']];
+const tplSize=bg=>bg==='exam'?{w:1240,h:1754}:{w:1920,h:1200};
+let resTab='tpl';
+function openRes(tab){if(tab)resTab=tab;$('#res').hidden=false;hidePanel();closePops();resRender()}
+function closeRes(){$('#res').hidden=true}
+async function resRender(){
+  $('#rsSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===resTab));
+  const body=$('#rsBody');$('#rsCls').textContent=wsCls()?'يُفتح في: '+wsCls().name:'';
+  if(resTab==='tpl'){
+    body.innerHTML=`<div class="rs-grid">${TPLS.map(t=>`<button class="rs-t" data-tpl="${t[0]}"><canvas width="192" height="${t[0]==='exam'?272:120}"></canvas><span>${t[1]}</span></button>`).join('')}</div>`;
+    body.querySelectorAll('.rs-t').forEach(b=>{const c=b.querySelector('canvas'),x=c.getContext('2d'),sz=tplSize(b.dataset.tpl),k=c.width/sz.w;x.scale(k,k);const sv=INV;INV=false;drawBg(x,newPage({w:sz.w,h:sz.h,bg:b.dataset.tpl}));INV=sv});
+    return}
+  body.innerHTML='<div class="rs-empty">جارٍ التحميل…</div>';
+  let all=[];try{all=await DB.all('files')}catch(e){}
+  all.sort((a,b)=>b.added-a.added);
+  const sz=n=>n>1048576?AR((n/1048576).toFixed(1))+' م.ب':AR(Math.max(1,Math.round(n/1024)))+' ك.ب';
+  body.innerHTML=`<button class="btn pri" id="rsAdd" style="width:100%;height:46px"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>إضافة ملف PDF أو صورة إلى مصادري</button>`+
+    (all.length?`<div class="rs-list">${all.map(r=>`<div class="rs-f"><span class="ic">${TAB_ICO[r.kind]||''}</span><span class="nm"><b>${esc(r.name)}</b><small>${r.kind==='pdf'?'PDF':'صورة'} · ${sz(r.size)} · ${new Date(r.added).toLocaleDateString('ar-EG',{day:'numeric',month:'short',year:'numeric'})}</small></span><button class="btn" data-open="${r.id}">فتح</button><button class="ib dng" data-del="${r.id}" title="حذف من المصادر"><svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/></svg></button></div>`).join('')}</div>`
+    :`<div class="rs-empty">لا توجد ملفات بعد.<br>أضف كتبك وأوراق العمل مرة واحدة، فتبقى محفوظة في التطبيق وتفتحها متى شئت مع كل ما كتبته عليها.</div>`);
+}
+async function openRec(id){
+  const i=docs.findIndex(d=>d.fileId===id);if(i>=0){switchDoc(i);closeRes();return}
+  try{const rec=await DB.get('files',id);if(!rec)return;toast('جارٍ فتح '+rec.name+'…',true);const d=await buildFileDoc(rec);addDocs([d]);closeRes();toast('فُتح الملف في تبويب جديد. اكتب عليه مباشرة.')}
+  catch(e){console.error(e);toast('تعذّر فتح الملف.')}
+}
+function addDocs(add){
+  stash();if(docs.length===1&&docs[0].kind==='board'&&docs[0].pages.length===1&&!docs[0].pages[0].items.length)docs=[];
+  docs.push(...add);D=docs.length-add.length;pages=docs[D].pages;cur=docs[D].cur||0;draft=null;fit();syncPages();hideHint();ensureNear();
+}
+$('#rsSeg').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){resTab=b.dataset.t;resRender()}});
+$('#rsClose').onclick=closeRes;
+$('#res').addEventListener('pointerdown',e=>{if(e.target.id==='res')closeRes()});
+$('#rsBody').addEventListener('click',async e=>{
+  const t=e.target.closest('[data-tpl]');if(t){const bg=t.dataset.tpl,sz=tplSize(bg),nm=TPLS.find(x=>x[0]===bg)[1];stash();docs.push({name:nm,kind:'board',pages:[newPage({bg,w:sz.w,h:sz.h})],cur:0});switchDoc(docs.length-1);closeRes();hideHint();toast('فُتح «'+nm+'» في تبويب جديد.');return}
+  if(e.target.closest('#rsAdd')){libIn.click();return}
+  const o=e.target.closest('[data-open]');if(o){openRec(o.dataset.open);return}
+  const d=e.target.closest('[data-del]');if(d){
+    if(!d.classList.contains('arm')){d.classList.add('arm');d.textContent='تأكيد الحذف';setTimeout(()=>{if(d.isConnected){d.classList.remove('arm');resRender()}},3000);return}
+    const id=d.dataset.del;try{await DB.del('files',id)}catch(e){}
+    for(let i=docs.length-1;i>=0;i--)if(docs[i].fileId===id)closeDoc(i);
+    toast('حُذف الملف من المصادر.');resRender();
+  }
+});
+const libIn=document.createElement('input');libIn.type='file';libIn.accept='application/pdf,.pdf,image/*';libIn.multiple=true;libIn.hidden=true;document.body.appendChild(libIn);
+libIn.onchange=async()=>{const f=[...libIn.files];libIn.value='';let n=0;for(const x of f){if(await libAdd(x))n++;else toast('هذا النوع غير مدعوم: '+x.name)}if(n){toast(n>1?`أُضيف ${AR(n)} ملفات إلى مصادري.`:'أُضيف الملف إلى مصادري. اضغط «فتح» لاستخدامه.');resTab='mine';resRender()}};
+
+/* ---------- Backup & restore ---------- */
+const b64=blob=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob)});
+$('#rsBackup').onclick=async()=>{
+  try{toast('جارٍ تجهيز النسخة الاحتياطية…',true);await saveWs(true);
+    const files=await DB.all('files'),ws=await DB.all('ws'),out={app:'mathboard',v:1,date:new Date().toISOString(),classes:CL,ws,files:[]};
+    for(const f of files)out.files.push({id:f.id,name:f.name,kind:f.kind,type:f.type,size:f.size,added:f.added,data:await b64(f.blob)});
+    const d=new Date(),nm=`نسخة-لوح-الرياضيات-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}.json`;
+    await saveBlob(new Blob([JSON.stringify(out)],{type:'application/json'}),nm);
+  }catch(e){console.error(e);toast('تعذّر إنشاء النسخة الاحتياطية.')}
+};
+const bkIn=document.createElement('input');bkIn.type='file';bkIn.accept='application/json,.json';bkIn.hidden=true;document.body.appendChild(bkIn);
+$('#rsRestore').onclick=()=>{const b=$('#rsRestore');if(!b.classList.contains('arm')){b.classList.add('arm');b.textContent='ستُستبدل بياناتك الحالية. اضغط للمتابعة';setTimeout(()=>{b.classList.remove('arm');b.textContent='استعادة نسخة'},4000);return}b.classList.remove('arm');b.textContent='استعادة نسخة';bkIn.click()};
+bkIn.onchange=async()=>{
+  const f=bkIn.files[0];bkIn.value='';if(!f)return;
+  try{toast('جارٍ الاستعادة…',true);const j=JSON.parse(await f.text());if(j.app!=='mathboard'||!j.classes)throw new Error('bad');
+    wsReady=false;await DB.clear('files');await DB.clear('ws');
+    for(const r of j.files||[]){const bin=atob(r.data),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);await DB.put('files',{id:r.id,name:r.name,kind:r.kind,type:r.type,size:r.size,added:r.added,blob:new Blob([u],{type:r.type||(r.kind==='pdf'?'application/pdf':'image/png')})})}
+    for(const w of j.ws||[])await DB.put('ws',w);
+    localStorage.setItem('mathboard.classes',JSON.stringify(j.classes));localStorage.setItem('mathboard.ws',j.classes.active||'');try{localStorage.removeItem(AS_KEY)}catch(e){}
+    toast('تمت الاستعادة. جارٍ إعادة التشغيل…',true);setTimeout(()=>location.reload(),700);
+  }catch(e){console.error(e);wsReady=true;toast('هذا الملف ليس نسخة احتياطية صالحة من لوح الرياضيات.')}
+};
+
+/* ================= Text & equations ================= */
+const TXT_COLORS=['#1c2541','#111111','#d1312c','#1d5fd3','#11905a','#e8751a','#7a3fc4'];
+const isAr=s=>/[ء-ي]/.test(s);
+function txTokens(line){
+  const out=[];let i=0,buf='';const flush=()=>{if(buf){out.push({k:'t',s:buf});buf=''}};
+  const grab=j=>{let d=0,k=j;for(;k<line.length;k++){if(line[k]==='{')d++;else if(line[k]==='}'){d--;if(!d)break}}return k};
+  while(i<line.length){const c=line[i];
+    if(c==='{'){const e=grab(i);const inner=line.slice(i+1,e),sl=inner.indexOf('/');if(sl>=0&&e<line.length){flush();out.push({k:'f',a:inner.slice(0,sl),b:inner.slice(sl+1)});i=e+1;continue}}
+    if(c==='√'&&line[i+1]==='{'){const e=grab(i+1);if(e<line.length){flush();out.push({k:'r',s:line.slice(i+2,e)});i=e+1;continue}}
+    if(c==='^'){if(line[i+1]==='{'){const e=grab(i+1);if(e<line.length){flush();out.push({k:'p',s:line.slice(i+2,e)});i=e+1;continue}}
+      const m=line.slice(i+1).match(/^[0-9٠-٩a-zA-Zس-ي\-+]+/);if(m){flush();out.push({k:'p',s:m[0]});i+=1+m[0].length;continue}}
+    buf+=c;i++}
+  flush();return out;
+}
+const TXF=(s,w=500)=>`${w} ${s}px "Readex Pro",sans-serif`;
+function txLayout(ctx,it){
+  const s=it.size,lines=String(it.text).split('\n').map(l=>{const tk=txTokens(l),rtl=isAr(l);let w=0,asc=.82*s,dsc=.28*s;
+    for(const t of tk){
+      if(t.k==='t'){ctx.font=TXF(s);t.w=ctx.measureText(t.s).width}
+      else if(t.k==='f'){ctx.font=TXF(s*.68);t.w=Math.max(ctx.measureText(t.a).width,ctx.measureText(t.b).width)+s*.3;asc=Math.max(asc,s*1.02);dsc=Math.max(dsc,s*.62)}
+      else if(t.k==='p'){ctx.font=TXF(s*.6);t.w=ctx.measureText(t.s).width+s*.06;asc=Math.max(asc,s*1.02)}
+      else if(t.k==='r'){ctx.font=TXF(s);t.w=ctx.measureText(t.s).width+s*.62;asc=Math.max(asc,s*1.02)}
+      w+=t.w}
+    return {tk,rtl,w,asc,dsc}});
+  let W=0,Hh=0;for(const l of lines){W=Math.max(W,l.w);Hh+=l.asc+l.dsc+s*.12}
+  return {lines,w:Math.max(W+s*.12,s*.5),h:Math.max(Hh,s)};
+}
+function drawText(ctx,it){
+  const L=txLayout(ctx,it),s=it.size;ctx.save();ctx.fillStyle=ctx.strokeStyle=it.color;ctx.textBaseline='alphabetic';ctx.textAlign='left';ctx.lineCap='round';ctx.lineJoin='round';
+  let y=it.y;const anyR=L.lines.some(l=>l.rtl);
+  for(const l of L.lines){y+=l.asc;let x=anyR?it.x+L.w:it.x;
+    for(const t of l.tk){const x0=anyR?x-t.w:x;
+      if(t.k==='t'){ctx.font=TXF(s);ctx.direction=isAr(t.s)||anyR?'rtl':'ltr';ctx.textAlign=ctx.direction==='rtl'?'right':'left';ctx.fillText(t.s,ctx.direction==='rtl'?x0+t.w:x0,y);ctx.textAlign='left';ctx.direction='ltr'}
+      else if(t.k==='f'){const by=y-s*.32,cx=x0+t.w/2;ctx.font=TXF(s*.68);ctx.textAlign='center';ctx.fillText(t.a,cx,by-s*.12);ctx.fillText(t.b,cx,by+s*.6);ctx.textAlign='left';
+        ctx.lineWidth=Math.max(1.5,s*.055);ctx.beginPath();ctx.moveTo(x0+s*.1,by);ctx.lineTo(x0+t.w-s*.1,by);ctx.stroke()}
+      else if(t.k==='p'){ctx.font=TXF(s*.6);ctx.fillText(t.s,x0+s*.03,y-s*.42)}
+      else if(t.k==='r'){ctx.lineWidth=Math.max(1.5,s*.055);ctx.beginPath();ctx.moveTo(x0+s*.04,y-s*.34);ctx.lineTo(x0+s*.16,y-s*.42);ctx.lineTo(x0+s*.3,y+s*.08);ctx.lineTo(x0+s*.48,y-s*.9);ctx.lineTo(x0+t.w-s*.02,y-s*.9);ctx.stroke();
+        ctx.font=TXF(s);ctx.fillText(t.s,x0+s*.54,y)}
+      x+=anyR?-t.w:t.w}
+    y+=l.dsc+s*.12}
+  ctx.restore();
+}
+function txMeasure(it){const L=txLayout(cO,it);it.w=L.w;it.h=L.h;return it}
+let txEdit=null;
+function openTextEditor(P,it){
+  closeTextEditor(true);
+  const st=S.txt,base=it?Object.assign({},it):{t:'text',x:P.x,y:P.y,text:'',size:st.size,color:st.color};
+  txEdit={orig:it||null,it:base};
+  const ed=$('#txEd'),ta=$('#txTa');ta.value=base.text;ed.hidden=false;
+  const sx=V.tx+base.x*V.s,sy=V.ty+(base.y+(it?it.h:0))*V.s+10;
+  const w=Math.min(W-24,440);ed.style.width=w+'px';ed.style.left=Math.max(12,Math.min(W-w-12,sx-w/2))+'px';
+  const eh=ed.offsetHeight;ed.style.top=Math.max(12,Math.min(H-eh-12,sy))+'px';
+  if(it){const p=pg(),i=p.items.indexOf(it);if(i>=0){snap();p.items.splice(i,1);renderBase()}}
+  txPreview();ta.focus();setTimeout(()=>ta.focus(),30);
+}
+function txPreview(){if(!txEdit)return;txEdit.it.text=$('#txTa').value;draft=txEdit.it.text.trim()?txMeasure(txEdit.it):null;renderLive()}
+function closeTextEditor(save){
+  if(!txEdit)return;const e=txEdit;txEdit=null;$('#txEd').hidden=true;draft=null;renderLive();
+  const txt=$('#txTa').value.replace(/\s+$/,'');
+  if(save&&txt){const it=txMeasure(Object.assign({},e.it,{text:txt}));if(e.orig){pg().items.push(it);renderBase()}else commit(it);sel=it;renderOver()}
+  else if(!save&&e.orig){pg().items.push(e.orig);renderBase()}
+  else if(save&&!txt&&e.orig){renderBase();toast('حُذف النص')}
+}
+$('#txTa').addEventListener('input',txPreview);
+$('#txTa').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeTextEditor(false)}if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();closeTextEditor(true)}});
+$('#txEd').addEventListener('click',e=>{
+  const b=e.target.closest('[data-ins]');if(b){const ta=$('#txTa'),v=b.dataset.ins,c=v.indexOf('|'),ins=v.replace('|',''),s=ta.selectionStart,en=ta.selectionEnd,selTxt=ta.value.slice(s,en);
+    let put=ins,caret=s+(c>=0?c:ins.length);if(selTxt&&c>=0){put=ins.slice(0,c)+selTxt+ins.slice(c);caret=s+c+selTxt.length}
+    ta.setRangeText(put,s,en,'end');ta.setSelectionRange(caret,caret);ta.focus();txPreview();return}
+  if(e.target.closest('#txOk'))closeTextEditor(true);
+  if(e.target.closest('#txCancel'))closeTextEditor(false);
+});
+
+/* ================= Function graphs ================= */
+const FNS={sin:'Math.sin',cos:'Math.cos',tan:'Math.tan',sqrt:'Math.sqrt',abs:'Math.abs',log:'Math.log10',ln:'Math.log',exp:'Math.exp'};
+const fnCache=new Map();
+function compileFn(src){
+  let s=String(src).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/٫/g,'.').replace(/^\s*(ص|y)\s*=\s*/i,'')
+    .replace(/جتا/g,'cos').replace(/جا/g,'sin').replace(/ظا/g,'tan').replace(/لو/g,'log').replace(/س/g,'x').replace(/X/g,'x')
+    .replace(/×/g,'*').replace(/÷/g,'/').replace(/[−–]/g,'-').replace(/²/g,'^2').replace(/³/g,'^3').replace(/π/g,'pi').replace(/√/g,'sqrt ').replace(/،/g,',');
+  for(let g=0;g<5&&/\|/.test(s);g++)s=s.replace(/\|([^|]+)\|/,'abs($1)');
+  s=s.replace(/sqrt\s+([a-z0-9.]+)/g,'sqrt($1)');
+  const toks=s.match(/\d+\.?\d*|\.\d+|[a-z]+|[-+*/^()]|\S/g)||[];let js='',prev=null;
+  const val=t=>t&&(/^[\d.]/.test(t)||t==='x'||t==='pi'||t==='e'||t===')');
+  for(const t of toks){
+    if(/^[a-z]+$/.test(t)&&!(t==='x'||t==='pi'||t==='e'||FNS[t]))throw new Error('id');
+    if(!/^(\d+\.?\d*|\.\d+|[a-z]+|[-+*/^()])$/.test(t))throw new Error('ch');
+    const starts=/^[\d.]/.test(t)||t==='x'||t==='pi'||t==='e'||t==='('||!!FNS[t];
+    if(val(prev)&&starts)js+='*';
+    if(t==='-'&&(prev===null||'(+-*/^'.includes(prev)))js+='(-1)*';
+    else js+=t==='^'?'**':t==='pi'?'Math.PI':t==='e'?'Math.E':FNS[t]||t;
+    prev=t}
+  const f=new Function('x','return '+js);const v=f(1.234);if(typeof v!=='number')throw new Error('nan');return {f,js};
+}
+function fnOf(it){let c=fnCache.get(it.js);if(!c){try{c=new Function('x','return '+it.js)}catch(e){c=()=>NaN}fnCache.set(it.js,c)}return c}
+function fnPts(it){const f=fnOf(it),segs=[];let cur=[],py=null;
+  for(let X=0;X<=it.w;X+=2){let y;try{y=f((X-it.ox)/U)}catch(e){y=NaN}const Y=it.oy-y*U;
+    if(!isFinite(Y)||Math.abs(Y)>it.h*4||(py!==null&&Math.abs(Y-py)>it.h)){if(cur.length>1)segs.push(cur);cur=[];py=null;if(!isFinite(Y)||Math.abs(Y)>it.h*4)continue}
+    cur.push([X,Y]);py=Y}
+  if(cur.length>1)segs.push(cur);return segs}
+function drawFn(ctx,it){const segs=fnPts(it);ctx.save();ctx.strokeStyle=it.color;ctx.lineWidth=it.size;ctx.lineJoin=ctx.lineCap='round';
+  for(const sg of segs){ctx.beginPath();sg.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke()}
+  let lab=null;for(let i=segs.length-1;i>=0&&!lab;i--)for(let j=segs[i].length-1;j>=0;j--){const q=segs[i][j];if(q[1]>50&&q[1]<it.h-50&&q[0]<it.w-120){lab=q;break}}
+  if(lab)pill(ctx,lab[0]-40,lab[1]-26,'ص = '+it.label,it.color,true);ctx.restore()}
+function hitFn(it,x,y,r){for(const sg of fnPts(it))for(let i=1;i<sg.length;i++)if(segD([x,y],sg[i-1],sg[i])<r+it.size)return true;return false}
+let fnColor='#d1312c';
+function openFnDlg(){closePops();hidePanel();$('#fnDlg').hidden=false;$('#fnErr').textContent='';fnSw();setTimeout(()=>$('#fnIn').focus(),40)}
+function fnSw(){$('#fnCols').innerHTML=PEN_COLORS.slice(0,7).map(c=>`<button class="sw" data-fc="${c}" style="--c:${c}" aria-pressed="${c===fnColor}"></button>`).join('')}
+function plotFn(){
+  const src=$('#fnIn').value.trim();if(!src)return;let c;
+  try{c=compileFn(src)}catch(e){$('#fnErr').textContent='لم أفهم الدالة. أمثلة صحيحة: س² − ٣ ، ٢س + ١ ، جا(س) ، |س|';return}
+  let p=pg();if(p.img||p.pdf){pages.splice(cur+1,0,newPage({bg:'coord'}));goPage(cur+1);p=pg()}else if(p.bg!=='coord'){p.bg='coord'}
+  const label=src.replace(/^\s*(ص|y)\s*=\s*/i,'');
+  commit({t:'fn',label,js:c.js,color:fnColor,size:4,ox:Math.round(p.w/2/U)*U,oy:Math.round(p.h/2/U)*U,w:p.w,h:p.h});
+  $('#fnDlg').hidden=true;toast('رُسمت الدالة ص = '+label+'. كل مربع = وحدة واحدة.');
+}
+$('#fnGo').onclick=plotFn;$('#fnClose').onclick=()=>{$('#fnDlg').hidden=true};
+$('#fnIn').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();plotFn()}if(e.key==='Escape')$('#fnDlg').hidden=true});
+$('#fnDlg').addEventListener('click',e=>{const x=e.target.closest('[data-ex]');if(x){$('#fnIn').value=x.dataset.ex;$('#fnIn').focus();return}
+  const s=e.target.closest('[data-fc]');if(s){fnColor=s.dataset.fc;fnSw();return}
+  const k=e.target.closest('[data-k]');if(k){const i=$('#fnIn');i.setRangeText(k.dataset.k,i.selectionStart,i.selectionEnd,'end');i.focus();return}
+  if(e.target.id==='fnDlg')$('#fnDlg').hidden=true});
+
+/* ================= Timer ================= */
+const TM={total:300,left:300,run:false,t0:0,raf:0,done:false};
+function tmFmt(s){s=Math.max(0,Math.ceil(s));return AR(Math.floor(s/60)).padStart(2,'٠')+':'+AR(s%60).padStart(2,'٠')}
+function tmDraw(){const el=$('#tmDisp');el.textContent=tmFmt(TM.left);$('#timer').classList.toggle('done',TM.done);$('#tmGo').textContent=TM.run?'إيقاف مؤقت':TM.left<TM.total&&TM.left>0?'متابعة':'ابدأ';
+  $('#tmBar').style.transform=`scaleX(${TM.total?TM.left/TM.total:0})`}
+function tmTick(){if(!TM.run)return;TM.left=TM.total-(performance.now()-TM.t0)/1000;
+  if(TM.left<=0){TM.left=0;TM.run=false;TM.done=true;tmDraw();tmBeep();if(navigator.vibrate)try{navigator.vibrate([200,100,200,100,400])}catch(e){}return}
+  tmDraw();TM.raf=requestAnimationFrame(tmTick)}
+function tmBeep(){try{const A=window.AudioContext||window.webkitAudioContext,a=new A();[0,.35,.7].forEach(d=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(.0001,a.currentTime+d);g.gain.exponentialRampToValueAtTime(.4,a.currentTime+d+.02);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+d+.28);o.start(a.currentTime+d);o.stop(a.currentTime+d+.3)})}catch(e){}}
+function tmSet(sec){TM.run=false;cancelAnimationFrame(TM.raf);TM.total=TM.left=Math.max(5,Math.min(5999,sec));TM.done=false;tmDraw()}
+function openTimer(){closePops();hidePanel();$('#timer').hidden=false;tmDraw()}
+$('#timer').addEventListener('click',e=>{
+  const p=e.target.closest('[data-m]');if(p){tmSet(+p.dataset.m*60);return}
+  const a=e.target.closest('[data-a]');if(a){tmSet((TM.run?TM.total:TM.left)+ +a.dataset.a);return}
+  if(e.target.closest('#tmGo')){if(TM.run){TM.run=false;cancelAnimationFrame(TM.raf);TM.total=TM.left;}else{if(TM.left<=0)tmSet(TM.total||60);TM.done=false;TM.total=TM.left;TM.t0=performance.now();TM.run=true;tmTick()}tmDraw();return}
+  if(e.target.closest('#tmReset')){tmSet(TM.total===TM.left?TM.total:Math.round(TM.total));return}
+  if(e.target.closest('#tmClose')){TM.run=false;cancelAnimationFrame(TM.raf);$('#timer').hidden=true}
+});
+let tmDrag=null;
+$('#tmHead').addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;const r=$('#timer').getBoundingClientRect();tmDrag={dx:e.clientX-r.left,dy:e.clientY-r.top};e.currentTarget.setPointerCapture(e.pointerId)});
+$('#tmHead').addEventListener('pointermove',e=>{if(!tmDrag)return;const t=$('#timer');t.style.left=Math.max(6,Math.min(W-t.offsetWidth-6,e.clientX-tmDrag.dx))+'px';t.style.top=Math.max(6,Math.min(H-t.offsetHeight-6,e.clientY-tmDrag.dy))+'px'});
+$('#tmHead').addEventListener('pointerup',()=>tmDrag=null);
+
+/* ================= More menu & board colour ================= */
+$('#moreBtn').onclick=e=>{
+  if(popEl&&popEl.classList.contains('morep')){closePops();return}
+  openPop(e.currentTarget,`<button class="it" data-m="fn"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/><path d="M5 19c3-1 4-12 7-12s4 11 7 12" stroke-width="2"/></svg><span>رسم دالة<small>مثل ص = س² − ٣</small></span></button>
+    <button class="it" data-m="timer"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2M10 3h4"/></svg><span>المؤقت<small>عدّ تنازلي كبير للأنشطة</small></span></button>
+    <button class="it" data-m="nets"><svg viewBox="0 0 24 24"><path d="M9 3h6v6H9zM3 9h6v6H3zM9 9h6v6H9zM15 9h6v6h-6zM9 15h6v6H9z"/></svg><span>شبكات المجسمات<small>فتح وطي المجسمات</small></span></button>
+    <button class="it" data-m="res"><svg viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H10l2 2h6.5A1.5 1.5 0 0 1 20 7.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5Z"/></svg><span>المصادر<small>قوالب جاهزة وملفاتي</small></span></button>`,ev=>{
+    const b=ev.target.closest('[data-m]');if(!b)return;const m=b.dataset.m;closePops();
+    if(m==='fn')openFnDlg();else if(m==='timer')openTimer();else if(m==='nets')openNets();else openRes();});
+  popEl.classList.add('morep');
+  const r=e.currentTarget.getBoundingClientRect();popEl.style.left=Math.max(12,r.left-popEl.offsetWidth-10)+'px';popEl.style.top=Math.max(12,Math.min(H-popEl.offsetHeight-12,r.top-20))+'px';
+};
+$('#resBtn').onclick=()=>openRes();
+
 /* ---------------- Boot ---------------- */
 addEventListener('resize',resize);
 matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>renderBase());
 new MutationObserver(()=>renderBase()).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-resize();setTool('pen',false);syncPages();syncInstrBtns();renderTabs();
+resize();setTool('pen',false);syncPages();syncInstrBtns();renderTabs();syncCls();wsBoot();
 document.fonts&&document.fonts.ready.then(()=>{redraw();placeMark()});
 if(asRestored){const h=$('#hint');h.classList.add('gone');h.hidden=true}
 window.__mb={pages:()=>pages,S,openFiles,commit,recognize};
