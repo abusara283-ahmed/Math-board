@@ -202,6 +202,12 @@ svg{display:block}
 #ring.open .rb,#ring.open .rc{transform:scale(1);opacity:1}
 
 /* ---------- Toast ---------- */
+#clipBar{position:fixed;z-index:19;left:50%;bottom:calc(max(14px,env(safe-area-inset-bottom,0px)) + 54px);transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:6px 6px 6px 8px;background:var(--chrome-solid);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);max-width:calc(100% - 28px)}
+#clipBar[hidden]{display:none}
+#clipBar img{height:40px;max-width:72px;object-fit:contain;border-radius:7px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+#clipBar .btn{height:40px;white-space:nowrap}
+#clipBar .cx{width:34px;height:34px;border:0;border-radius:10px;background:transparent;display:grid;place-items:center;color:var(--muted)}
+#clipBar .cx svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 #toast{position:fixed;z-index:60;bottom:max(18px,env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,20px);background:var(--ink);color:var(--desk);padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 40px);text-align:center}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -395,6 +401,7 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
     <button class="tool" data-tool="shape" title="الأشكال الهندسية (S)"><svg viewBox="0 0 24 24" id="shapeIco"><path d="M12 4 20 18H4Z"/></svg><span class="lbl">أشكال</span></button>
     <button class="tool" data-tool="erase" title="الممحاة (E)"><svg viewBox="0 0 24 24"><path d="m14.5 4.7 4.8 4.8a1.5 1.5 0 0 1 0 2.1L12 19H8.2l-3.5-3.5a1.5 1.5 0 0 1 0-2.1l7.7-7.7a1.5 1.5 0 0 1 2.1 0Z"/><path d="m9.5 9.5 5 5M12 19h8"/></svg><span class="lbl">ممحاة</span></button>
     <button class="tool" data-tool="pan" title="تحريك اللوح (V أو مفتاح المسافة)"><svg viewBox="0 0 24 24"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-.5V4.5a1.5 1.5 0 0 1 3 0V10m0-3.5a1.5 1.5 0 0 1 3 0v7a6.5 6.5 0 0 1-6.5 6.5h-.8a6 6 0 0 1-4.6-2.2L4.3 14.4a1.6 1.6 0 0 1 2.4-2.1L9 14.5"/></svg><span class="lbl">تحريك</span></button>
+    <button class="tool" data-tool="snip" title="قص جزء ولصقه (X)"><svg viewBox="0 0 24 24"><circle cx="6.5" cy="17.5" r="2.6"/><circle cx="17.5" cy="17.5" r="2.6"/><path d="M8.4 15.6 16 4.5M15.6 15.6 8 4.5"/></svg><span class="lbl">قص</span></button>
   </div>
   <div class="sep"></div>
   <div class="grp">
@@ -414,6 +421,7 @@ body.fs.idle #fsHandle{transform:translate(-50%,0)}
 <section id="panel" class="hide" aria-live="polite"></section>
 
 <div id="credit" aria-label="إعداد وتصميم أحمد الهطالي"><span>إعداد وتصميم</span><i></i><b>أحمد الهطالي</b></div>
+<div id="clipBar" hidden><img id="clipImg" alt=""><button class="btn pri" id="clipPaste"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4.5V3h6v1.5"/></svg>لصق القصاصة هنا</button><button class="cx" id="clipX" title="إلغاء القصاصة" aria-label="إلغاء القصاصة"><svg viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></svg></button></div>
 <div id="zoom">
   <button class="tb" id="zOut" title="تصغير"><svg viewBox="0 0 24 24"><path d="M6 12h12"/></svg></button>
   <button class="tb" id="zoomVal" title="ملاءمة الصفحة للشاشة">١٠٠٪</button>
@@ -530,11 +538,11 @@ try{const a=JSON.parse(localStorage.getItem(AS_KEY)||'null');
     if(r.length){docs=r;D=Math.max(0,Math.min(r.length-1,a.D|0));asRestored=r.some(d=>d.pages.some(p=>p.items.length))}
   }}catch(e){console.warn('autosave restore failed',e)}
 let pages=docs[D].pages,cur=docs[D].cur;
-let asLast='';
+let asLast='',asWarned=false;
 function autosave(){
   try{stash();const bd=docs.filter(d=>d.kind==='board');
     const out={v:1,D:Math.max(0,bd.indexOf(docs[D])),docs:bd.map(d=>({name:d.name,cur:d.cur,pages:d.pages.map(p=>({w:p.w,h:p.h,bg:p.bg,items:p.items}))}))};
-    const j=JSON.stringify(out);if(j===asLast)return;localStorage.setItem(AS_KEY,j);asLast=j;
+    const j=JSON.stringify(out);if(j===asLast)return;try{localStorage.setItem(AS_KEY,j)}catch(q){out.docs.forEach(d=>d.pages.forEach(p=>{p.items=p.items.filter(i=>i.t!=='img')}));localStorage.setItem(AS_KEY,JSON.stringify(out));if(!asWarned){asWarned=true;toast('الذاكرة ممتلئة: القصاصات الملصقة لن تُحفظ تلقائيًا. صدّر عملك PDF للاحتفاظ بها.')}}asLast=j;
   }catch(e){console.warn('autosave failed',e)}
 }
 setInterval(autosave,3000);
@@ -741,7 +749,10 @@ function pill(ctx,x,y,t,color,big){
 }
 function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
 function hexA(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`}
-function drawItem(ctx,it){it.t==='shape'?drawShape(ctx,it):drawStroke(ctx,it)}
+const IMGS=new Map();
+function imgOf(src){let im=IMGS.get(src);if(!im){im=new Image();im.onload=()=>{renderBase()};im.src=src;IMGS.set(src,im)}return im}
+function drawImgItem(ctx,it){const im=imgOf(it.src);if(im.complete&&im.naturalWidth)ctx.drawImage(im,it.x,it.y,it.w,it.h);else{ctx.save();ctx.fillStyle='#eef1f4';ctx.fillRect(it.x,it.y,it.w,it.h);ctx.restore()}}
+function drawItem(ctx,it){it.t==='img'?drawImgItem(ctx,it):it.t==='shape'?drawShape(ctx,it):drawStroke(ctx,it)}
 
 function renderPage(ctx,p){drawBg(ctx,p);for(const it of p.items)drawItem(ctx,it)}
 function renderBase(){
@@ -762,7 +773,7 @@ const _ds=drawStroke;
 drawStroke=function(ctx,it){if(it.t==='hlLive'){ctx.save();ctx.globalAlpha=.55;ctx.lineCap=it.pts.length===2?'butt':'round';ctx.lineJoin='round';ctx.strokeStyle=it.color;ctx.lineWidth=it.size;strokePts(ctx,it.pts);ctx.restore();return}_ds(ctx,it)};
 
 /* ---------------- Instruments ---------------- */
-let hover=null,pulse=null;
+let hover=null,pulse=null,snipR=null,sel=null,clip=null;
 function rulerLocal(r,x,y){const dx=x-r.x,dy=y-r.y,c=Math.cos(-r.a),s=Math.sin(-r.a);return {u:dx*c-dy*s,v:dx*s+dy*c}}
 function rulerWorld(r,u,v){const c=Math.cos(r.a),s=Math.sin(r.a);return {x:r.x+u*c-v*s,y:r.y+u*s+v*c}}
 function renderOver(){
@@ -770,6 +781,12 @@ function renderOver(){
   cO.setTransform(DPR*V.s,0,0,DPR*V.s,DPR*V.tx,DPR*V.ty);
   for(const r of instr)r.type==='ruler'?drawRuler(cO,r):drawProt(cO,r);
   if(hover&&S.tool==='erase'&&!panning){cO.beginPath();cO.arc(hover.x,hover.y,S.eraseSize/V.s*.9,0,7);cO.fillStyle='rgba(196,60,50,.08)';cO.fill();cO.lineWidth=1.5/V.s;cO.strokeStyle='#c43c32';cO.stroke()}
+  if(snipR){const x=Math.min(snipR.x1,snipR.x2),y=Math.min(snipR.y1,snipR.y2),w=Math.abs(snipR.x2-snipR.x1),h=Math.abs(snipR.y2-snipR.y1),p=pg();
+    cO.save();cO.fillStyle='rgba(16,24,40,.28)';cO.beginPath();cO.rect(0,0,p.w,p.h);cO.rect(x+w,y,-w,h);cO.fill('evenodd');
+    cO.setLineDash([8/V.s,6/V.s]);cO.lineWidth=2/V.s;cO.strokeStyle='#0b7a70';cO.strokeRect(x,y,w,h);cO.restore()}
+  if(sel&&pg().items.includes(sel)){const s2=sel;cO.save();cO.setLineDash([7/V.s,5/V.s]);cO.lineWidth=2/V.s;cO.strokeStyle='#0b7a70';cO.strokeRect(s2.x,s2.y,s2.w,s2.h);cO.restore();
+    handle(cO,s2.x,s2.y,'x');const rx=s2.x+s2.w,ry=s2.y+s2.h,r=15/V.s;cO.save();cO.beginPath();cO.arc(rx,ry,r,0,7);cO.fillStyle='#0b7a70';cO.shadowColor='rgba(0,0,0,.25)';cO.shadowBlur=8/V.s;cO.fill();cO.restore();
+    cO.save();cO.strokeStyle='#fff';cO.lineWidth=2.2/V.s;cO.lineCap='round';const d=5.5/V.s;cO.beginPath();cO.moveTo(rx-d,ry-d);cO.lineTo(rx+d,ry+d);cO.moveTo(rx+d,ry+d-4/V.s);cO.lineTo(rx+d,ry+d);cO.lineTo(rx+d-4/V.s,ry+d);cO.moveTo(rx-d,ry-d+4/V.s);cO.lineTo(rx-d,ry-d);cO.lineTo(rx-d+4/V.s,ry-d);cO.stroke();cO.restore()}
   if(pulse){const k=(performance.now()-pulse.t)/420;if(k<1){cO.beginPath();cO.arc(pulse.x,pulse.y,(14+40*k)/V.s,0,7);cO.lineWidth=3/V.s;cO.strokeStyle=hexA('#0b7a70',1-k);cO.stroke();requestAnimationFrame(renderOver)}else pulse=null}
 }
 function handle(ctx,x,y,kind){
@@ -887,6 +904,7 @@ function commit(it){snap();pg().items.push(it);renderBase();hideHint()}
 
 /* ---------------- Erasing ---------------- */
 function hitItem(it,x,y,r){
+  if(it.t==='img')return x>=it.x-r&&x<=it.x+it.w+r&&y>=it.y-r&&y<=it.y+it.h+r;
   if(it.t!=='shape'){const rr=r+it.size/2;const p=it.pts;if(p.length===1)return Math.hypot(p[0][0]-x,p[0][1]-y)<rr;
     for(let i=1;i<p.length;i++)if(segD([x,y],p[i-1],p[i])<rr)return true;return false}
   const g=geom(it),rr=r+it.size/2;
@@ -901,6 +919,30 @@ function eraseAt(x,y){
   for(let i=p.items.length-1;i>=0;i--)if(hitItem(p.items[i],x,y,r)){if(!eraseSnapped){snap();eraseSnapped=true}p.items.splice(i,1);changed=true}
   if(changed)renderBase();
 }
+
+/* ---------------- Snip & paste ---------------- */
+function topImg(x,y){const it=pg().items;for(let i=it.length-1;i>=0;i--){const q=it[i];if(q.t==='img'&&x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h)return q}return null}
+function selHit(x,y){const s2=sel,hr=22/V.s;if(Math.hypot(x-s2.x,y-s2.y)<hr)return 'x';if(Math.hypot(x-s2.x-s2.w,y-s2.y-s2.h)<hr)return 'rs';if(x>=s2.x&&x<=s2.x+s2.w&&y>=s2.y&&y<=s2.y+s2.h)return 'body';return null}
+function beginEdit(it){snap();const p=pg(),i=p.items.indexOf(it),c=Object.assign({},it);p.items[i]=c;sel=c;return c}
+async function snipCapture(r){
+  const p=pg();if(!r)return;
+  const x=Math.max(0,Math.min(r.x1,r.x2)),y=Math.max(0,Math.min(r.y1,r.y2)),w=Math.min(p.w,Math.max(r.x1,r.x2))-x,h=Math.min(p.h,Math.max(r.y1,r.y2))-y;
+  if(!(w>14&&h>14)){toast('اسحب على الصفحة لتحديد الجزء الذي تريد قصّه.');return}
+  try{if(p.pdf&&!p.img)await ensureImg(p);
+    const k=Math.max(1,Math.min(2,1400/Math.max(w,h))),c=document.createElement('canvas');c.width=Math.round(w*k);c.height=Math.round(h*k);
+    const g=c.getContext('2d');g.scale(k,k);g.translate(-x,-y);renderPage(g,p);
+    clip={src:c.toDataURL('image/jpeg',.9),w,h};c.width=c.height=0;
+    $('#clipImg').src=clip.src;$('#clipBar').hidden=false;
+    toast(docs.length>1?'نُسخ الجزء. انتقل إلى التبويب أو الصفحة المطلوبة واضغط «لصق القصاصة هنا».':'نُسخ الجزء. انتقل إلى الصفحة المطلوبة واضغط «لصق القصاصة هنا».');
+  }catch(e){console.error(e);toast('تعذّر قص هذا الجزء. حاول مرة أخرى.')}
+}
+function pasteClip(){
+  if(!clip)return;const p=pg(),c=toPage(W/2,H/2),k=Math.min(1,p.w*.7/clip.w,p.h*.7/clip.h),w=clip.w*k,h=clip.h*k;
+  const it={t:'img',src:clip.src,x:Math.max(0,Math.min(p.w-w,c.x-w/2)),y:Math.max(0,Math.min(p.h-h,c.y-h/2)),w,h};
+  commit(it);sel=it;renderOver();toast('أُلصقت القصاصة. اسحبها لتحريكها، والدائرة الخضراء في زاويتها لتكبيرها.');
+}
+$('#clipPaste').onclick=pasteClip;
+$('#clipX').onclick=()=>{clip=null;$('#clipBar').hidden=true};
 
 /* ---------------- Pointer handling ---------------- */
 const ptrs=new Map();let penSeen=false,act=null,panning=false,spaceDown=false,pinch=null,holdTimer=null;
@@ -921,6 +963,13 @@ stage.addEventListener('pointerdown',e=>{
   const P=toPage(e.clientX,e.clientY);
   const tool=(e.buttons&32)?'erase':(spaceDown||e.button===1)?'pan':S.tool;
   hidePanel();
+  if(sel&&pg().items.includes(sel)){const h=selHit(P.x,P.y);
+    if(h==='x'){snap();pg().items.splice(pg().items.indexOf(sel),1);sel=null;renderBase();renderOver();return}
+    if(h==='rs'){const it=beginEdit(sel);act={kind:'imgrs',it,id:e.pointerId};return}
+    if(h==='body'){const it=beginEdit(sel);act={kind:'imgmv',it,ox:it.x-P.x,oy:it.y-P.y,id:e.pointerId};stage.dataset.cursor='move';return}}
+  if(sel){sel=null;renderOver()}
+  if(tool==='pan'){const im=topImg(P.x,P.y);if(im){const it=beginEdit(im);act={kind:'imgmv',it,ox:it.x-P.x,oy:it.y-P.y,id:e.pointerId};renderOver();return}}
+  if(tool==='snip'){snipR={x1:P.x,y1:P.y,x2:P.x,y2:P.y};act={kind:'snip',id:e.pointerId};renderOver();return}
   if(tool==='pan'){act={kind:'pan',id:e.pointerId,x:e.clientX,y:e.clientY,tx:V.tx,ty:V.ty};panning=true;stage.dataset.cursor='panning';return}
   const hit=hitInstr(P.x,P.y);
   if(hit&&hit.part==='x'){instr.splice(instr.indexOf(hit.r),1);syncInstrBtns();renderOver();return}
@@ -962,6 +1011,9 @@ stage.addEventListener('pointermove',e=>{
   switch(act.kind){
     case 'pan':V.tx=act.tx+e.clientX-act.x;V.ty=act.ty+e.clientY-act.y;redraw();break;
     case 'imove':act.r.x=P.x+act.ox;act.r.y=P.y+act.oy;renderOver();break;
+    case 'imgmv':act.it.x=P.x+act.ox;act.it.y=P.y+act.oy;renderBase();renderOver();break;
+    case 'imgrs':{const it=act.it,ar=it.h/it.w;it.w=Math.max(40,P.x-it.x);it.h=it.w*ar;renderBase();renderOver();break}
+    case 'snip':snipR.x2=P.x;snipR.y2=P.y;renderOver();break;
     case 'irot':{const r=act.r;let cx,cy;if(r.type==='ruler'){const c=rulerWorld(r,0,0);cx=c.x;cy=c.y}else{cx=r.x;cy=r.y}
       let a=Math.atan2(P.y-cy,P.x-cx);if(r.type==='ruler'){a=Math.atan2(P.y-cy,P.x-cx)-Math.atan2(r.w/2,r.len)}
       const st=Math.PI/12,sn=Math.round(a/st)*st;if(Math.abs(a-sn)<.035)a=sn;r.a=a;renderOver();break}
@@ -993,6 +1045,8 @@ function endPtr(e){
   if(!act||act.id!==e.pointerId)return;
   clearTimeout(holdTimer);
   const a=act;act=null;
+  if(a.kind==='snip'){const r=snipR;snipR=null;renderOver();snipCapture(r);return}
+  if(a.kind==='imgmv'||a.kind==='imgrs'){pg().thumb=null;stage.dataset.cursor=S.tool==='pan'?'pan':'pen';return}
   if(a.kind==='pan'){panning=false;stage.dataset.cursor=S.tool==='pan'||spaceDown?'pan':S.tool==='erase'?'erase':'pen';return}
   if(a.kind==='draw'||a.kind==='snapped'||a.kind==='ruler'||a.kind==='shape'){
     const d=draft;draft=null;renderLive();if(!d)return;
@@ -1034,7 +1088,8 @@ function buildPanel(){
   else if(t==='erase')h=`<h3>الممحاة <small>E</small></h3><div class="sec"><span class="cap">حجم الممحاة</span><div class="sizes">${[12,20,36].map(s=>`<button class="sz" data-es="${s}" aria-pressed="${s===S.eraseSize}"><i style="width:${s*.6}px;height:${s*.6}px;border-radius:50%;background:transparent;border:2px solid var(--ink)"></i></button>`).join('')}</div>
     <p class="note">تمسح الممحاة الخط أو الشكل كاملًا بلمسة واحدة، ولا تمس ملف PDF أو الصورة.</p></div>
     <div class="sec row"><button class="btn dng" id="clrPg">مسح الصفحة</button><button class="btn dng" id="delPg">حذف الصفحة</button></div>`;
-  else if(t==='pan')h=`<h3>تحريك اللوح <small>V</small></h3><p class="note" style="margin:0">اسحب لتحريك الصفحة. للتكبير استخدم إصبعين أو Ctrl مع عجلة الفأرة. مفتاح المسافة يحرّك اللوح مؤقتًا مع أي أداة.</p>`;
+  else if(t==='snip')h=`<h3>قص ولصق <small>X</small></h3><p class="note" style="margin:0">١. اسحب مستطيلًا على أي جزء من صفحة PDF أو صورة أو سبورة.<br>٢. انتقل إلى التبويب أو الصفحة التي تريدها.<br>٣. اضغط «لصق القصاصة هنا» أسفل الشاشة.<br><br>لتحريك قصاصة لاحقًا أو تكبيرها أو حذفها، اختر أداة «تحريك» ثم اضغط عليها.</p>`;
+  else if(t==='pan')h=`<h3>تحريك اللوح <small>V</small></h3><p class="note" style="margin:0">اسحب لتحريك الصفحة. لتحريك قصاصة ملصقة اضغط عليها واسحبها. للتكبير استخدم إصبعين أو Ctrl مع عجلة الفأرة. مفتاح المسافة يحرّك اللوح مؤقتًا مع أي أداة.</p>`;
   el.innerHTML=h;
 }
 function setTool(t,open=true){
@@ -1274,7 +1329,7 @@ addEventListener('dragenter',e=>{if([...e.dataTransfer.types].includes('Files'))
 addEventListener('dragleave',()=>{if(--dragN<=0){dragN=0;$('#drop').hidden=true}});
 addEventListener('dragover',e=>e.preventDefault());
 addEventListener('drop',e=>{e.preventDefault();dragN=0;$('#drop').hidden=true;const f=[...e.dataTransfer.files];if(f.length)openFiles(f)});
-addEventListener('paste',e=>{if(e.target.closest&&e.target.closest('textarea,input'))return;const f=[...(e.clipboardData?.files||[])].filter(x=>x.type.startsWith('image/'));if(f.length){e.preventDefault();openFiles(f)}});
+addEventListener('paste',e=>{if(e.target.closest&&e.target.closest('textarea,input'))return;const f=[...(e.clipboardData?.files||[])].filter(x=>x.type.startsWith('image/'));if(f.length){e.preventDefault();openFiles(f)}else if(clip){e.preventDefault();pasteClip()}});
 
 /* ---------------- Quick ring ---------------- */
 const RING_TOOLS=[['pen','قلم'],['hl','تمييز'],['shape','أشكال'],['erase','ممحاة'],['pan','تحريك'],['undo','تراجع'],['pick','قرعة'],['ruler','مسطرة']];
@@ -1305,8 +1360,9 @@ addEventListener('keydown',e=>{
   if(m&&k==='z'){e.preventDefault();e.shiftKey?redo():undo();return}
   if(m&&k==='y'){e.preventDefault();redo();return}
   if(m)return;
+  if((e.key==='Delete'||e.key==='Backspace')&&sel&&pg().items.includes(sel)){e.preventDefault();snap();pg().items.splice(pg().items.indexOf(sel),1);sel=null;renderBase();renderOver();return}
   if(e.key===' '){if(!spaceDown){spaceDown=true;stage.dataset.cursor='pan'}e.preventDefault();return}
-  const map={p:'pen',h:'hl',s:'shape',e:'erase',v:'pan','ح':'pen','ا':'hl','س':'shape','ث':'erase','ر':'pan'};
+  const map={p:'pen',h:'hl',s:'shape',e:'erase',v:'pan',x:'snip','ء':'snip','ح':'pen','ا':'hl','س':'shape','ث':'erase','ر':'pan'};
   if(map[k]){setTool(map[k],false);return}
   if(k==='r'||k==='ق')toggleInstr('ruler');
   if(k==='q'||k==='ض'){quickDraw();return}
@@ -1316,7 +1372,7 @@ addEventListener('keydown',e=>{
     if(e.key==='Enter'){e.preventDefault();navJump();return}}
   if(/^[1-9١-٩]$/.test(e.key)&&pages.length>1){e.preventDefault();openNav(+toLatin(e.key));return}
   if(k==='f'||k==='ب'){toggleFS();return}
-  if(e.key==='Escape'){closeRing();closePops();hidePanel();qdHide();if(focusMode){focusMode=false;syncFS()}}
+  if(e.key==='Escape'){if(sel){sel=null;renderOver()}closeRing();closePops();hidePanel();qdHide();if(focusMode){focusMode=false;syncFS()}}
   if(e.key==='PageDown'||e.key==='ArrowLeft')goPage(cur+1);
   if(e.key==='PageUp'||e.key==='ArrowRight')goPage(cur-1);
   if(e.key==='0')fit();if(e.key==='+'||e.key==='=')zoomAt(1.2,W/2,H/2);if(e.key==='-')zoomAt(1/1.2,W/2,H/2);
